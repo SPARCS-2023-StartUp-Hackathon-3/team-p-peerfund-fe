@@ -5,6 +5,11 @@ const { TextArea } = Input;
 
 interface IProjectFormProps {}
 
+const tailFormCols = {
+  labelCol: { span: 24 },
+  wrapperCol: { span: 24 },
+};
+
 const ProjectForm: FunctionComponent<IProjectFormProps> = (props) => {
   return (
     <CommonForm>
@@ -19,7 +24,7 @@ const ProjectForm: FunctionComponent<IProjectFormProps> = (props) => {
       <Form.Item label="제목">
         <Input placeholder="글 제목을 입력해주세요." size="large" />
       </Form.Item>
-      <Form.Item name={'description'}>
+      <Form.Item name={'description'} {...tailFormCols}>
         <TextArea rows={10} placeholder="프로젝트에 대해 소개해주세요." size="large" />
       </Form.Item>
     </CommonForm>

@@ -3,10 +3,10 @@ import React, { FunctionComponent } from 'react';
 
 interface IFormCols {
   labelCol?: {
-    span: number;
+    span: any | number;
   };
   wrapperCol?: {
-    span: number;
+    span: any | number;
   };
 }
 
@@ -20,8 +20,34 @@ interface ICommonFormProps {
 const { useForm } = Form;
 
 const defaultFormCols = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
+  labelCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 8,
+    },
+    md: {
+      span: 4,
+    },
+    lg: {
+      span: 4,
+    },
+  },
+  wrapperCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 16,
+    },
+    md: {
+      span: 20,
+    },
+    lg: {
+      span: 20,
+    },
+  },
 };
 
 const CommonForm: FunctionComponent<ICommonFormProps> = (props) => {

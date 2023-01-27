@@ -40,6 +40,7 @@
     "react-scripts": "^5.0.1",
     "recoil": "^0.7.6",
     "styled-components": "^5.3.6",
+    "ts-enum-util": "^4.0.2",
     "typescript": "^3.9.7"
   },
   "scripts": {
