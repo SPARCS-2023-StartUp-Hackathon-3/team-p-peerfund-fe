@@ -11,6 +11,7 @@ const routerMeta: RouterMetaTypes = {
   About: ['/about', '/test'],
   Project: '/project/:projectId',
   TestForm: '/testform',
+  ProjectTestForm: '/projecttestform',
 };
 
 export default routerMeta;
