@@ -1,2 +1,2 @@
-import range from './range'
-export default range
+import range from './range';
+export default range;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import palette from '../../style/palette';
+import palette from '@/style/palette';
 
 const ProjectListDiv = styled.div`
   display: grid;

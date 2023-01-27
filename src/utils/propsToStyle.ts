@@ -1,9 +1,9 @@
-import { CSSProperties } from "styled-components";
+import { CSSProperties } from 'styled-components';
 
 export const propsToStyle = (props: CSSProperties): string => {
-  if (!props || typeof props !== 'object') return ""
-  
-  let output = "";
+  if (!props || typeof props !== 'object') return '';
+
+  let output = '';
   for (let key in props) {
     if (props.hasOwnProperty(key)) {
       const casedKey = cssCasing(key);
@@ -12,12 +12,12 @@ export const propsToStyle = (props: CSSProperties): string => {
       output = output.concat(`${casedKey}:${isNumberToPixel ? value + 'px' : value} !important;`);
     }
   }
-  return output; 
-}
+  return output;
+};
 
 const cssCasing = (camelString: string): string => {
-  let output = ""
-  let stringArr = camelString.split("");
+  let output = '';
+  let stringArr = camelString.split('');
 
   stringArr.map((sChar) => {
     if (!isUppercase(sChar)) {
@@ -25,14 +25,14 @@ const cssCasing = (camelString: string): string => {
     } else {
       output = output.concat(`-${sChar.toLowerCase()}`);
     }
-  })
+  });
 
   return output;
-}
+};
 
 const isUppercase = (character: string): boolean => {
   if (character === character.toUpperCase()) return true;
   return false;
-}
+};
 
-export default propsToStyle
+export default propsToStyle;

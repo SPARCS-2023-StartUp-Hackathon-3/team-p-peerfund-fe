@@ -1,13 +1,13 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
 export interface CategoryType {
-  id: number,
-  title: string
+  id: number;
+  title: string;
 }
 
 const categoryState = atom<CategoryType[]>({
   key: 'categoryState',
-  default: []
+  default: [],
 });
 
-export default categoryState
+export default categoryState;

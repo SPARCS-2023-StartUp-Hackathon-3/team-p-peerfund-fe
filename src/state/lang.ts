@@ -1,18 +1,18 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
-import ko from "@/locale/ko.json";
-import en from "@/locale/en.json";
+import ko from '@/locale/ko.json';
+import en from '@/locale/en.json';
 
 export enum Lang {
   KO = 'ko',
-  EN = 'en'
+  EN = 'en',
 }
 
 export const messages: { [key in Lang]: any } = { ko, en };
 
 const langState = atom<Lang>({
   key: 'langState',
-  default: Lang.KO
+  default: Lang.KO,
 });
 
-export default langState
+export default langState;

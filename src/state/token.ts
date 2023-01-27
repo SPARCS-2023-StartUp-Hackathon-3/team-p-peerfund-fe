@@ -1,8 +1,8 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
 const tokenState = atom<string>({
   key: 'tokenState',
-  default: localStorage.getItem("libi_token") || ""
+  default: localStorage.getItem('libi_token') || '',
 });
 
-export default tokenState
+export default tokenState;

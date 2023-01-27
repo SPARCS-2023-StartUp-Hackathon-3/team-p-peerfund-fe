@@ -1,8 +1,8 @@
-import styled, { CSSProperties } from 'styled-components'
-import { propsToStyle } from "@/utils";
+import styled, { CSSProperties } from 'styled-components';
+import { propsToStyle } from '@/utils';
 
 interface Props {
-  style?: CSSProperties
+  style?: CSSProperties;
 }
 
 const FlexCenter: any = styled.div`
@@ -17,8 +17,8 @@ const FlexCenter: any = styled.div`
   -ms-flex-direction: row;
   -o-flex-direction: row;
   flex-direction: row;
-  
-  ${(props: Props) => propsToStyle(props.style || {})}
-`
 
-export default FlexCenter
+  ${(props: Props) => propsToStyle(props.style || {})}
+`;
+
+export default FlexCenter;
