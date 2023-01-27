@@ -1,58 +1,24 @@
-import CommonForm from '@/components/CommonForm';
-import React from 'react';
-import { Button, Cascader, Form, Input, InputNumber, Radio, Select, Switch, TreeSelect } from 'antd';
+import React, { FunctionComponent, useState } from 'react';
+import { Select } from 'antd';
+import FormSelector, { FormType } from '@/components/Forms/FormSwitcher';
+import DefaultLayout from '@/components/DefaultLayout';
 
 interface ITestFormProps {}
 
+console.log('FormType', Object.keys(FormType));
+const typeOptions = Object.keys(FormType)
+  .splice(1, 1)
+  .map((type) => ({ value: type, label: type }));
+const initValue = typeOptions?.[0].value;
+
 const TestForm: React.FunctionComponent<ITestFormProps> = (props) => {
+  const [formType, setFormType] = useState<string>(initValue);
+  const FormComp: FunctionComponent<any> | undefined = FormSelector(FormType[formType]);
   return (
-    <div>
-      <CommonForm>
-        <Form.Item label="Form Size" name="size">
-          <Radio.Group>
-            <Radio.Button value="small">Small</Radio.Button>
-            <Radio.Button value="default">Default</Radio.Button>
-            <Radio.Button value="large">Large</Radio.Button>
-          </Radio.Group>
-        </Form.Item>
-        <Form.Item label="Input">
-          <Input />
-        </Form.Item>
-        <Form.Item label="Select">
-          <Select>
-            <Select.Option value="demo">Demo</Select.Option>
-          </Select>
-        </Form.Item>
-        <Form.Item label="TreeSelect">
-          <TreeSelect
-            treeData={[
-              {
-                title: 'Light',
-                value: 'light',
-                children: [{ title: 'Bamboo', value: 'bamboo' }],
-              },
-            ]}
-          />
-        </Form.Item>
-        <Form.Item label="Cascader">
-          <Cascader
-            options={[
-              {
-                value: 'zhejiang',
-                label: 'Zhejiang',
-                children: [{ value: 'hangzhou', label: 'Hangzhou' }],
-              },
-            ]}
-          />
-        </Form.Item>
-        <Form.Item label="InputNumber">
-          <InputNumber />
-        </Form.Item>
-        <Form.Item label="Switch" valuePropName="checked">
-          <Switch />
-        </Form.Item>
-      </CommonForm>
-    </div>
+    <DefaultLayout>
+      <Select options={typeOptions} defaultValue={initValue} onChange={setFormType} style={{ width: 300 }} />
+      {FormComp && <FormComp />}
+    </DefaultLayout>
   );
 };
 

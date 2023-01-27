@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import ProjectForm from './ProjectFrom';
 
-enum FormType {
+export enum FormType {
   PROJECT_FORM,
 }
 
