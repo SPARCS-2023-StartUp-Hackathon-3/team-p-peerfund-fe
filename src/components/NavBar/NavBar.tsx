@@ -5,12 +5,16 @@ import { routerMeta } from "@/meta";
 import { Link } from "react-router-dom";
 import { assignRouteArrayProps } from "@/utils";
 import { useIntl } from "react-intl";
+import palette from "@/style/palette";
+
+const { primary } = palette
 
 interface INavBarProps {}
 
 const menuStyle = {
 	width: "100%",
 	display: "flex",
+	backgroundColor: primary
 };
 
 const defaultMenus = Object.keys(routerMeta).reduce(
@@ -52,7 +56,7 @@ const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
 	const { formatMessage: fm } = useIntl();
 	return (
 		<Layout>
-			<Header className="header" style={{ display: "flex" }}>
+			<Header className="header" style={{ display: "flex", backgroundColor: primary }}>
 				<div
 					className="logo"
 					style={{
