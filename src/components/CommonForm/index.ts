@@ -1,2 +1,2 @@
-import CommonForm from "./CommonForm";
+import CommonForm from './CommonForm';
 export default CommonForm;

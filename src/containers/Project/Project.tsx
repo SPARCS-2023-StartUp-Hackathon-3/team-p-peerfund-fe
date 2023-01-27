@@ -1,5 +1,5 @@
-import React from "react";
-import DefaultLayout from "@/components/DefaultLayout";
+import React from 'react';
+import DefaultLayout from '@/components/DefaultLayout';
 
 const Project = () => {
   return <DefaultLayout>ProjectPage</DefaultLayout>;
