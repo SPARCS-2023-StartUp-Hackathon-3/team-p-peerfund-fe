@@ -82,6 +82,7 @@
     "no-prototype-builtins": "off",
     "prefer-template": "off",
     "array-callback-return": "off",
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/react-in-jsx-scope": "off"
   }
 }
