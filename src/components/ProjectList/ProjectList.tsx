@@ -49,6 +49,12 @@ const ProjectTypeDiv = styled.div`
   }
 `;
 
+const ColoredH1 = styled.h1`
+  font-size: 24px;
+  font-weight: bold;
+  color: ${palette.primary};
+`;
+
 const tempProjects = Array(10).fill(1);
 
 interface IProjectListProps {
@@ -77,7 +83,7 @@ const ProjectList = ({ title, firstCategories = [], secondCategories }: IProject
 
   return (
     <>
-      <h1>{title}</h1>
+      <ColoredH1>{title}</ColoredH1>
 
       <CategoryGroupDiv>
         {firstCategories ? (

@@ -4,6 +4,6 @@ const palette = {
   darkGrey: '#333333',
   grey: '#f6f7f9',
   white: '#ffffff',
-}
+};
 
-export default palette
+export default palette;
