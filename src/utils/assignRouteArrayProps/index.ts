@@ -1,2 +1,2 @@
-import assignRouteArrayProps from './assignRouteArrayProps'
-export default assignRouteArrayProps
+import assignRouteArrayProps from './assignRouteArrayProps';
+export default assignRouteArrayProps;

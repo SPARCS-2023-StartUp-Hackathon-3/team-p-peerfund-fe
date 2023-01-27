@@ -1,2 +1,2 @@
-import FlexCenter from './FlexCenter'
-export default FlexCenter
+import FlexCenter from './FlexCenter';
+export default FlexCenter;

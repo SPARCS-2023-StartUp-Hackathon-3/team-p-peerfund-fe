@@ -1,8 +1,8 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
 const locationState = atom<any>({
   key: 'locationState',
-  default: {}
+  default: {},
 });
 
-export default locationState
+export default locationState;

@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import palette from "../../style/palette";
+import React from 'react';
+import styled from 'styled-components';
+import palette from '@/style/palette';
 
 const BannerDiv = styled.div`
   min-height: 230px;

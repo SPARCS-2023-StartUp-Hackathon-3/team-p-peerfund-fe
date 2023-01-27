@@ -1,2 +1,2 @@
-import DefaultLayout from './DefaultLayout'
-export default DefaultLayout
+import DefaultLayout from './DefaultLayout';
+export default DefaultLayout;

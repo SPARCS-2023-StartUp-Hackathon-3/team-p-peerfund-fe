@@ -1,5 +1,8 @@
-const range = (x: number, y: number) => Array.from((function *() {
-  while (x <= y) yield x++;
-})());
+const range = (x: number, y: number) =>
+  Array.from(
+    (function* () {
+      while (x <= y) yield x++;
+    })(),
+  );
 
-export default range
+export default range;
