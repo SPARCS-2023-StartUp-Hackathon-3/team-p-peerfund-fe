@@ -3,6 +3,9 @@ import DefaultLayout from '@/components/DefaultLayout';
 import styled from 'styled-components';
 import palette from '@/style/palette';
 
+import { Divider, Form, Input, Select } from 'antd';
+const { TextArea } = Input;
+
 const DarkH1 = styled.h1`
   font-size: 29px;
   font-weight: bold;
@@ -99,6 +102,7 @@ const Project = () => {
       <div style={{ marginBottom: '30px' }}>{tempData.content}</div>
 
       <DarkH1>{tempComments.length}개의 댓글이 있습니다.</DarkH1>
+      <TextArea rows={3} placeholder="댓글을 달아주세요." size="large" />
       <CommentUl>
         {tempComments.map((comment, index) => (
           <Commentli key={index}>
