@@ -1,13 +1,24 @@
-import CommonForm from '@/components/CommonForm';
-import React from 'react';
+import React, { FunctionComponent, useState } from 'react';
+import { Select } from 'antd';
+import FormSelector, { FormType } from '@/components/Forms/FormSwitcher';
+import DefaultLayout from '@/components/DefaultLayout';
 
 interface ITestFormProps {}
 
+console.log('FormType', Object.keys(FormType));
+const typeOptions = Object.keys(FormType)
+  .splice(1, 1)
+  .map((type) => ({ value: type, label: type }));
+const initValue = typeOptions?.[0].value;
+
 const TestForm: React.FunctionComponent<ITestFormProps> = (props) => {
+  const [formType, setFormType] = useState<string>(initValue);
+  const FormComp: FunctionComponent<any> | undefined = FormSelector(FormType[formType]);
   return (
-    <div>
-      <CommonForm />
-    </div>
+    <DefaultLayout>
+      <Select options={typeOptions} defaultValue={initValue} onChange={setFormType} style={{ width: 300 }} />
+      {FormComp && <FormComp />}
+    </DefaultLayout>
   );
 };
 
