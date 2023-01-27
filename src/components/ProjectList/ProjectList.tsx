@@ -1,8 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import palette from "../../style/palette";
 
-const ProductListDiv = styled.div`
+const ProjectListDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   place-items: center;
@@ -11,7 +12,7 @@ const ProductListDiv = styled.div`
   margin: 20px 0;
 `;
 
-const ProdictItemDiv = styled.div`
+const ProjectItemDiv = styled.div`
   width: 200px;
   height: 230px;
   background-color: ${palette.dark};
@@ -32,9 +33,15 @@ const CategoryButton = styled.button`
 
 const CATEGORIES_OF_PROJECTS = ["전체", "프로젝트", "스터디"];
 
-const tempProducts = Array(10).fill(1);
+const tempProjects = Array(10).fill(1);
 
-const ProductList = () => {
+const ProjectList = () => {
+  const navigate = useNavigate();
+
+  const onClickProject = (projectId: string) => {
+    navigate(`/project/${projectId}`);
+  };
+
   return (
     <>
       <CategoryGroupDiv>
@@ -44,13 +51,16 @@ const ProductList = () => {
           </CategoryButton>
         ))}
       </CategoryGroupDiv>
-      <ProductListDiv>
-        {tempProducts.map((tempProduct, index) => (
-          <ProdictItemDiv key={index}></ProdictItemDiv>
+      <ProjectListDiv>
+        {tempProjects.map((tempProject, index) => (
+          <ProjectItemDiv
+            key={index}
+            onClick={() => onClickProject(tempProject)}
+          ></ProjectItemDiv>
         ))}
-      </ProductListDiv>
+      </ProjectListDiv>
     </>
   );
 };
 
-export default ProductList;
+export default ProjectList;
