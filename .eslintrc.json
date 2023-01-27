@@ -84,6 +84,7 @@
     "array-callback-return": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "react/react-in-jsx-scope": "off",
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
+    "prettier/prettier": ["error", { "endOfLine": "auto" }]
   }
 }
