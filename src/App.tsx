@@ -15,7 +15,7 @@ const App: FunctionComponent<any> = () => {
     <IntlProvider locale={lang} messages={messages[lang]}>
       <GlobalStyle />
       <Router>
-        <div style={{ display: 'flex', flexDirection: 'column', alignContent: 'conter', height: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignContent: 'center', height: '100%' }}>
           <NavBar />
           <CommonRouter />
         </div>
