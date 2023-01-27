@@ -55,7 +55,7 @@ const defaultMenus = Object.keys(routerMeta).reduce(
 const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
 	const { formatMessage: fm } = useIntl();
 	return (
-		<Layout>
+		<Layout style={{ flex: 'none' }}>
 			<Header className="header" style={{ display: "flex", backgroundColor: primary }}>
 				<div
 					className="logo"

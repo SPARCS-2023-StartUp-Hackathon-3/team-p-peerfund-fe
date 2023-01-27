@@ -8,7 +8,7 @@ const { Content } = Layout;
 interface IDefaultLayoutProps {}
 
 const defaultStyle = {
-  height: "100%",
+  // height: "100%",
   width: "798px",
   paddingRight: "15px",
   paddingLeft: "15px",
