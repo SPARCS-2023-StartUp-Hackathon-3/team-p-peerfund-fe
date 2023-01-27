@@ -28,6 +28,20 @@ const InfoGridDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 10px;
+  align-content: start;
+  justify-content: start;
+`;
+
+const CommentUl = styled.ul`
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const Commentli = styled.li`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const tempData = {
@@ -40,6 +54,21 @@ const tempData = {
   type: '프로젝트',
   skill: 'Figma',
 };
+
+const tempComments = [
+  {
+    author: 'jiheon788',
+    content: '이번 해커톤에서도 팀원을 구하기가 정말 힘들었는데',
+  },
+  {
+    author: 'donho',
+    content: '개발자로 전향한 이후, 서비스 개발의 전체',
+  },
+  {
+    author: 'sparcs',
+    content: '조금씩 타 범위를 공부하기 시작했',
+  },
+];
 
 const Project = () => {
   return (
@@ -67,7 +96,17 @@ const Project = () => {
       <ProjectInfoDiv>
         <DarkH1>프로젝트 소개</DarkH1>
       </ProjectInfoDiv>
-      <div>{tempData.content}</div>
+      <div style={{ marginBottom: '30px' }}>{tempData.content}</div>
+
+      <DarkH1>{tempComments.length}개의 댓글이 있습니다.</DarkH1>
+      <CommentUl>
+        {tempComments.map((comment, index) => (
+          <Commentli key={index}>
+            <span>{comment.content}</span>
+            <span>{comment.author}</span>
+          </Commentli>
+        ))}
+      </CommentUl>
     </DefaultLayout>
   );
 };

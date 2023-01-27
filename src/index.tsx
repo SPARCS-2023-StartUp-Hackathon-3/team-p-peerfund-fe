@@ -1,15 +1,13 @@
-import React from "react";
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import "./index.less";
-import App from "./App";
-import theme from '@/style/theme'
+import './index.less';
+import App from './App';
+import theme from '@/style/theme';
 
-import {
-  RecoilRoot
-} from "recoil";
+import { RecoilRoot } from 'recoil';
 
-import * as serviceWorker from "./serviceWorker";
-import { ConfigProvider } from "antd";
+import * as serviceWorker from './serviceWorker';
+import { ConfigProvider } from 'antd';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -20,7 +18,7 @@ root.render(
       </ConfigProvider>
     </RecoilRoot>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root'),
 );
 
 serviceWorker.unregister();
