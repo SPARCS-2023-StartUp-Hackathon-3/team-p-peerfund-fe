@@ -2,6 +2,7 @@ import React, { FunctionComponent, CSSProperties } from "react";
 import DefaultLayout from "@/components/DefaultLayout";
 import Banner from "@/components/Banner";
 import CategoryJob from "@/components/CategoryJob";
+import ProductList from "@/components/ProductList";
 
 interface ICardViewProps {}
 
@@ -14,6 +15,7 @@ const Home: FunctionComponent<ICardViewProps> = (props) => {
     <DefaultLayout>
       <Banner />
       <CategoryJob />
+      <ProductList />
     </DefaultLayout>
   );
 };

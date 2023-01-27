@@ -9,6 +9,11 @@ interface IDefaultLayoutProps {}
 
 const defaultStyle = {
   height: "100%",
+  width: "798px",
+  paddingRight: "15px",
+  paddingLeft: "15px",
+  marginRight: "auto",
+  marginLeft: "auto",
 };
 
 const DefaultLayout: FunctionComponent<IDefaultLayoutProps> = (props) => {
