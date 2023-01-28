@@ -18,7 +18,7 @@ const Container = styled.div`
   margin-left: auto;
 
   @media screen and (max-width: 700px) {
-    width: 100%;
+    width: 90%;
   }
 `;
 
