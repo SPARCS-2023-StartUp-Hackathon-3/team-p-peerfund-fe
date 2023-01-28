@@ -7,6 +7,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import DefaultImg from '@/style/background.png';
 
 import type { TabsProps } from 'antd';
+import Project from '@/components/Project';
 const { CheckableTag } = Tag;
 
 const { Meta } = Card;
@@ -151,21 +152,10 @@ const ProjectList = () => {
 
       <InfiniteScroll dataLength={projects.length} next={fetchData} hasMore={true} loader={<h4>Loading...</h4>}>
         <ProjectListDiv>
-          {projects.map((item, index) => (
-            <Card
-              key={index}
-              bordered={false}
-              hoverable
-              cover={<img alt="example" src={item.img} />}
-              onClick={() => onClickProject(item.title)}
-            >
-              <Meta
-                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                title={item.title + index}
-                description="description"
-              />
-            </Card>
-          ))}
+          {projects.map((item, index) => {
+            const { title, author } = item;
+            return <Project key={index} id={index} title={title} author={author} />;
+          })}
         </ProjectListDiv>
       </InfiniteScroll>
     </>
