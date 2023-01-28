@@ -3,12 +3,14 @@ import ProjectForm from './ProjectForm';
 import FundingForm from './FundingForm';
 import ItemForm from './ItemForm';
 import PeerForm from './PeerForm';
+import SprintForm from './SprintForm';
 
 export enum FormType {
   PEER_FORM,
   PROJECT_FORM,
   FUNDING_FORM,
   ITEM_FORM,
+  SPRINT_FORM,
 }
 
 const FormSelector: (formType: FormType) => FunctionComponent<any> | undefined = (formType) => {
@@ -21,6 +23,8 @@ const FormSelector: (formType: FormType) => FunctionComponent<any> | undefined =
       return FundingForm;
     case FormType.ITEM_FORM:
       return ItemForm;
+    case FormType.SPRINT_FORM:
+      return SprintForm;
   }
 };
 

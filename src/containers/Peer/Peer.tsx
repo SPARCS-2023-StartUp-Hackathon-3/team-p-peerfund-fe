@@ -1,6 +1,4 @@
 import React, { FunctionComponent, CSSProperties } from 'react';
-import DefaultLayout from '@/components/DefaultLayout';
-import Banner from '@/components/Banner';
 import ProjectList from '@/components/ProjectList';
 import styled from 'styled-components';
 
@@ -29,7 +27,6 @@ const Peer: FunctionComponent<ICardViewProps> = (props) => {
 
   return (
     <Container>
-      <Banner />
       <ProjectList />
     </Container>
   );

@@ -1,9 +1,7 @@
-import React, { FunctionComponent, CSSProperties } from 'react';
+import React, { FunctionComponent, CSSProperties, useState } from 'react';
 import styled from 'styled-components';
-import DefaultLayout from '@/components/DefaultLayout';
-import Banner from '@/components/Banner';
-import ProjectList from '@/components/ProjectList';
 import Background from '@/style/background.png';
+import FormSelector, { FormType } from '@/components/Forms/FormSwitcher';
 
 interface ICardViewProps {}
 
@@ -28,10 +26,13 @@ const HomeBoxDiv = styled.div`
 `;
 
 const LeftBoxDiv = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   background-color: rgba(207, 207, 207, 0.3);
   border-radius: 50px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: #fff;
 `;
 const RightBoxDiv = styled.div`
   display: grid;
@@ -44,10 +45,12 @@ interface Props {
 }
 
 const Home: FunctionComponent<ICardViewProps> = (props) => {
+  const FormComp: FunctionComponent<any> | undefined = FormSelector(FormType['SPRINT_FORM']);
+
   return (
     <BackgroundDiv>
       <HomeBoxDiv>
-        <LeftBoxDiv></LeftBoxDiv>
+        <LeftBoxDiv>{FormComp && <FormComp />}</LeftBoxDiv>
         <RightBoxDiv></RightBoxDiv>
       </HomeBoxDiv>
     </BackgroundDiv>
