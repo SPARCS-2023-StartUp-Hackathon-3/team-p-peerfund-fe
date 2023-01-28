@@ -9,7 +9,8 @@ interface Props {
 }
 
 const Container = styled.div`
-  width: 75%;
+  max-width: 1200px;
+  width: calc(100% - 30px);
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
