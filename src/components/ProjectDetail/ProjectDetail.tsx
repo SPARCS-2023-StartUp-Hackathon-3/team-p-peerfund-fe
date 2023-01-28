@@ -89,7 +89,6 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
         <Col {...imageColumns}>
           <div
             style={{
-              flex: 'none',
               borderRadius: '16px',
               maxWidth: '600px',
               width: '100%',
@@ -103,7 +102,7 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
         </Col>
         <Col {...descriptionColumns}>
           <FlexCenter style={{ padding: 15, height: '100%' }}>
-            <ProjectDescription style={{ width: 'auto' }}>
+            <ProjectDescription style={{ width: '100%' }}>
               <Descriptions column={1} bordered>
                 <Descriptions.Item label="진행 날짜">{`${tempData.start_date} ~ ${tempData.end_date}`}</Descriptions.Item>
                 <Descriptions.Item label="아이디어">있음</Descriptions.Item>
