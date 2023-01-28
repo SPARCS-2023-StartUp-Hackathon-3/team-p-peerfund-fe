@@ -1,18 +1,26 @@
 import { FunctionComponent } from 'react';
 import ProjectForm from './ProjectForm';
 import FundingForm from './FundingForm';
+import ItemForm from './ItemForm';
+import PeerForm from './PeerForm';
 
 export enum FormType {
+  PEER_FORM,
   PROJECT_FORM,
   FUNDING_FORM,
+  ITEM_FORM,
 }
 
 const FormSelector: (formType: FormType) => FunctionComponent<any> | undefined = (formType) => {
   switch (formType) {
+    case FormType.PEER_FORM:
+      return PeerForm;
     case FormType.PROJECT_FORM:
       return ProjectForm;
     case FormType.FUNDING_FORM:
       return FundingForm;
+    case FormType.ITEM_FORM:
+      return ItemForm;
   }
 };
 

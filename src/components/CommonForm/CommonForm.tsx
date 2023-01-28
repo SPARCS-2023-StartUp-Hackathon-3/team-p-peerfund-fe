@@ -2,12 +2,8 @@ import { Form, FormInstance } from 'antd';
 import React, { FunctionComponent } from 'react';
 
 interface IFormCols {
-  labelCol?: {
-    span: any | number;
-  };
-  wrapperCol?: {
-    span: any | number;
-  };
+  labelCol?: any;
+  wrapperCol?: any;
 }
 
 interface ICommonFormProps {

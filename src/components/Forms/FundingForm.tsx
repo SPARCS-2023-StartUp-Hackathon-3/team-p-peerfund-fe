@@ -22,7 +22,7 @@ const FundingForm: FunctionComponent<IFundingFormProps> = (props) => {
     <CommonForm formCols={fullColumn}>
       <Divider orientation="left">펀딩 계획을 입력해주세요</Divider>
       <InnerForm>
-        <Form.Item label="목표 금액" name="plan_money">
+        <Form.Item label="목표 금액" name="plan_price">
           <InputNumber addonAfter={'원'} defaultValue={100000} />
         </Form.Item>
         <Form.Item name={'funding_date'} label={'펀딩 기간'} extra={'최대 60일 제한'}>
