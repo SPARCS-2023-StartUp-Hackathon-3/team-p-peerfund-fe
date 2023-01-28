@@ -13,6 +13,7 @@ const { lightgrey } = palette;
 
 const HintText: any = styled.span`
   color: ${lightgrey} !important;
+  font-size: 14px;
 `;
 
 const TextFormItem: FunctionComponent<ITextFormItemProps> = ({ title, description }) => {
