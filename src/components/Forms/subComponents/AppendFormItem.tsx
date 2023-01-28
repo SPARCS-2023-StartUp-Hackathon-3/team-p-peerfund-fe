@@ -1,7 +1,7 @@
 import FlexCenter from '@/components/FlexCenter';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Space } from 'antd';
-import React, { Component, FunctionComponent } from 'react';
+import { Button, Form } from 'antd';
+import React, { FunctionComponent } from 'react';
 import { fullColumn } from '../meta';
 
 interface IAppendFormItemProps {

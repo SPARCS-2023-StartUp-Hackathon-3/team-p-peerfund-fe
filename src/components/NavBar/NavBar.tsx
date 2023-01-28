@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Layout, Menu } from 'antd';
 const { Header } = Layout;
 import { routerMeta } from '@/meta';
-import { Link } from 'react-router-dom';
-import { assignRouteArrayProps } from '@/utils';
+import { Link, useLocation } from 'react-router-dom';
+import { assignRouteArrayProps, isEmpty } from '@/utils';
 import { useIntl } from 'react-intl';
 import palette from '@/style/palette';
+import Account from '@/components/Account';
+import { useRecoilValue } from 'recoil';
+import accountState from '@/state/account';
+import MenuPopOver from '@/components/MenuPopOver';
+import { UserOutlined } from '@ant-design/icons';
 
 const { primary } = palette;
 
@@ -17,37 +22,64 @@ const menuStyle = {
   backgroundColor: primary,
 };
 
-const defaultMenus = Object.keys(routerMeta).reduce((prev: any[], componentKey: string) => {
+const nextRouter = (prev: any[], next: any, componentKey: string) => {
+  const { length, ...rest } = next;
+  if (length === 1) {
+    return [...prev, { componentKey, ...rest }];
+  } else {
+    return prev;
+  }
+};
+
+const defaultMenus: any[] = Object.keys(routerMeta).reduce((prev: any[], componentKey: string) => {
   const propsArr: any = assignRouteArrayProps(routerMeta[componentKey]);
-  const { path } = assignRouteArrayProps(routerMeta[componentKey]);
+  const { hide, path, ...rest } = propsArr;
 
   const getPath = (path: string) => (path.match(/\//gi) || []).length;
 
   const pathWIthSlashLengthArr: any | any[] = Array.isArray(propsArr)
-    ? propsArr.map(({ path }) => ({ path, length: getPath(path) }))
-    : { path, length: getPath(path) };
+    ? propsArr.map(({ path }) => ({ path, ...rest, length: getPath(path) }))
+    : { path, ...rest, length: getPath(path) };
 
-  if (Array.isArray(pathWIthSlashLengthArr)) {
-    const assignPathData = pathWIthSlashLengthArr.reduce((prevArr, { path, length }) => {
-      if (length === 1) {
-        return [...prevArr, { componentKey, path }];
-      } else {
-        return prevArr;
-      }
-    }, []);
+  if (hide) {
+    return prev;
+  } else if (Array.isArray(pathWIthSlashLengthArr)) {
+    const assignPathData = pathWIthSlashLengthArr.reduce(
+      (prevArr, next) => nextRouter(prevArr, next, componentKey),
+      [],
+    );
     return [...prev, ...assignPathData];
   } else {
-    const { path, length } = pathWIthSlashLengthArr;
-    if (length === 1) {
-      return [...prev, { componentKey, path }];
-    } else {
-      return prev;
-    }
+    return nextRouter(prev, pathWIthSlashLengthArr, componentKey);
   }
 }, []);
 
 const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
   const { formatMessage: fm } = useIntl();
+  const account = useRecoilValue(accountState);
+  const location = useLocation();
+
+  const savedAccount: any = useMemo(() => {
+    if (isEmpty(account)) {
+      return undefined;
+    }
+    return account;
+  }, [account]);
+
+  const assignMenus = useMemo(
+    () =>
+      defaultMenus.filter(({ account, path }) => {
+        if (account) {
+          return !!savedAccount;
+        } else if (account === undefined) {
+          return true;
+        } else {
+          return !savedAccount;
+        }
+      }),
+    [savedAccount],
+  );
+
   return (
     <Layout style={{ flex: 'none' }}>
       <Header className="header" style={{ display: 'flex', backgroundColor: primary }}>
@@ -70,6 +102,19 @@ const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
             </Menu.Item>
           ))}
         </Menu>
+        <div style={{ opacity: 1, marginLeft: 'auto', order: assignMenus.length + 2 }}>
+          <MenuPopOver
+            buttonProps={
+              {
+                placement: 'bottomLeft',
+                title: 'Account',
+                content: <Account />,
+              } as any
+            }
+          >
+            <UserOutlined />
+          </MenuPopOver>
+        </div>
       </Header>
     </Layout>
   );

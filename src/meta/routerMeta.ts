@@ -1,14 +1,26 @@
 import { RouteProps } from 'react-router-dom';
 
-type RouteMetaType = string | Omit<RouteProps, 'component'>;
+interface CustomRouteProps {
+  title: string;
+  hide: boolean;
+  account: boolean;
+}
 
-export type RouterMetaTypes = {
-  [key: string]: RouteMetaType | RouteMetaType[];
-};
+export type RouteMetaProps = Omit<RouteProps, 'component'> & Partial<CustomRouteProps>;
+
+export type RouteMetaType = string | RouteMetaProps;
+
+export type RouterMetaTypes = { [key: string]: RouteMetaType | RouteMetaType[] };
 
 const routerMeta: RouterMetaTypes = {
   Home: { path: '/' },
   Peer: { path: '/peer' },
+  About: ['/about', '/test'],
+  Register: {
+    path: '/register',
+    account: false,
+    hide: true,
+  },
   Project: '/project/:projectId',
   Apply: '/apply/:projectId',
   TestForm: '/testform',
