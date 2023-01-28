@@ -2,9 +2,9 @@ import React, { useState, useEffect, ChangeEvent } from 'react';
 import DefaultLayout from '@/components/DefaultLayout';
 import styled from 'styled-components';
 import palette from '@/style/palette';
-
-import { Input } from 'antd';
+import { Input, Button, Modal } from 'antd';
 import { useParams } from 'react-router-dom';
+import ApplyModal from '@/components/ApplyModal';
 const { TextArea } = Input;
 
 const DarkH1 = styled.h1`
@@ -76,7 +76,7 @@ const tempComments = [
 
 const Project = () => {
   const params = useParams();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [commentData, setCommentData] = useState({
     comment: '',
     projectId: params.projectId,
@@ -93,6 +93,10 @@ const Project = () => {
     console.log(commentData);
   }, [commentData]);
 
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   return (
     <DefaultLayout>
       <ProjectInfoDiv>
@@ -104,7 +108,11 @@ const Project = () => {
             <span>{tempData.date}</span>
           </div>
         </div>
-        <button type="button">지원하기</button>
+        <Button type="primary" onClick={toggleModal}>
+          지원하기
+        </Button>
+
+        <ApplyModal title={tempData.title} isModalOpen={isModalOpen} toggleModal={toggleModal}></ApplyModal>
       </ProjectInfoDiv>
       <InfoGridDiv>
         <span>모집 구분</span>

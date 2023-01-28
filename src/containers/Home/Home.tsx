@@ -10,18 +10,15 @@ interface Props {
 }
 
 const Home: FunctionComponent<ICardViewProps> = (props) => {
-  const firstCategories = ['기획자', '디자이너', '프론트엔드', '백엔드', '기타'];
-  const secondCategories = ['전체', '프로젝트', '스터디'];
+  const jobTypes = ['기획자', '디자이너', '프론트엔드', '백엔드', '기타'];
+  const projectTypes = ['전체', '프로젝트', '스터디'];
+  const fundingStatus = ['전체', '펀딩 진행중', '공개예정'];
 
   return (
     <DefaultLayout>
       <Banner />
-      <ProjectList
-        title={'주목할 만한 구인 모집'}
-        firstCategories={firstCategories}
-        secondCategories={secondCategories}
-      />
-      <ProjectList title={'주목할 만한 크라우드 펀딩'} secondCategories={secondCategories} />
+      <ProjectList title={'주목 할 만한 모집 공고'} firstCategories={jobTypes} secondCategories={projectTypes} />
+      <ProjectList title={'주목 할 만한 프로젝트'} secondCategories={fundingStatus} />
     </DefaultLayout>
   );
 };

@@ -10,12 +10,8 @@ interface IDefaultLayoutProps {
 }
 
 const defaultStyle = {
-  // height: "100%",
-  width: '798px',
-  paddingRight: '15px',
-  paddingLeft: '15px',
-  marginRight: 'auto',
-  marginLeft: 'auto',
+  height: '100%',
+  // width: '100%',
 };
 
 const DefaultLayout: FunctionComponent<IDefaultLayoutProps> = (props) => {
@@ -40,9 +36,14 @@ const DefaultLayout: FunctionComponent<IDefaultLayoutProps> = (props) => {
         <Content
           className="site-layout-background"
           style={{
+            maxWidth: '1400px',
             padding: 24,
             margin: 0,
             minHeight: 280,
+            paddingRight: '15px',
+            paddingLeft: '15px',
+            marginRight: 'auto',
+            marginLeft: 'auto',
           }}
         >
           {children}

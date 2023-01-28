@@ -7,14 +7,14 @@ const ProjectListDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   place-items: center;
-  column-gap: 40px;
-  row-gap: 48px;
+  column-gap: 20px;
+  row-gap: 30px;
   margin: 20px 0;
 `;
 
 const ProjectItemDiv = styled.div`
-  width: 200px;
-  height: 230px;
+  width: 400px;
+  height: 450px;
   background-color: ${palette.dark};
   border-radius: 20px;
   cursor: pointer;
@@ -76,10 +76,6 @@ const ProjectList = ({ title, firstCategories = [], secondCategories }: IProject
     temp[index] = !temp[index];
     setIsSelect(temp);
   };
-
-  useEffect(() => {
-    console.log(isSelect);
-  }, [isSelect]);
 
   return (
     <>

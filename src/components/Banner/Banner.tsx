@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import palette from '@/style/palette';
 
 const BannerDiv = styled.div`
-  min-height: 230px;
+  min-height: 450px;
   background-color: ${palette.dark};
   display: flex;
   flex-direction: column;
