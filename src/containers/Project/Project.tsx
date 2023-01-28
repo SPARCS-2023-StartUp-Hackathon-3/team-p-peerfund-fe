@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import palette from '@/style/palette';
 import { Input, Button, Modal } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
+import { generateIndexImage } from '@/utils';
+import FlexCenter from '@/components/FlexCenter';
 const { TextArea } = Input;
 
 const DarkH1 = styled.h1`
@@ -74,12 +76,11 @@ const tempComments = [
 ];
 
 const Project = () => {
-  const params = useParams();
+  const { projectId } = useParams();
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [commentData, setCommentData] = useState({
     comment: '',
-    projectId: params.projectId,
+    projectId,
   });
 
   const onChangeComment = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -94,7 +95,7 @@ const Project = () => {
   }, [commentData]);
 
   const onClickApplyBtn = () => {
-    navigate(`/apply/${params.projectId}`);
+    navigate(`/apply/${projectId}`);
   };
 
   return (
@@ -112,14 +113,27 @@ const Project = () => {
           지원하기
         </Button>
       </ProjectInfoDiv>
-      <InfoGridDiv>
-        <span>모집 구분</span>
-        <span>{tempData.type}</span>
-        <span>모집 인원</span>
-        <span>{tempData.numOfPeople}</span>
-        <span>사용 기술</span>
-        <span>{tempData.skill}</span>
-      </InfoGridDiv>
+      <FlexCenter>
+        <div
+          style={{
+            borderRadius: '16px',
+            width: '800px',
+            height: '400px',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundImage: `url(${generateIndexImage(Number(projectId))})`,
+          }}
+        />
+        <InfoGridDiv style={{ flex: 'none' }}>
+          <span>모집 구분</span>
+          <span>{tempData.type}</span>
+          <span>모집 인원</span>
+          <span>{tempData.numOfPeople}</span>
+          <span>사용 기술</span>
+          <span>{tempData.skill}</span>
+        </InfoGridDiv>
+      </FlexCenter>
 
       <ProjectInfoDiv>
         <DarkH1>프로젝트 소개</DarkH1>
