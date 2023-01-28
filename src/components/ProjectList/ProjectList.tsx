@@ -2,29 +2,31 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '@/style/palette';
-import { Card } from 'antd';
+import { Card, Space, Tag, Avatar, Tabs } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import DefaultImg from '@/style/background.png';
+
+import type { TabsProps } from 'antd';
+const { CheckableTag } = Tag;
+
 const { Meta } = Card;
 
 const ProjectListDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  place-items: center;
+  place-projects: center;
   column-gap: 20px;
   row-gap: 30px;
   margin: 20px 0;
+  padding: 15px;
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
 
   @media screen and (max-width: 700px) {
     grid-template-columns: 1fr;
   }
-`;
-
-const ProjectItemDiv = styled.div`
-  width: 100%;
-  min-height: 400px;
-  background-color: ${palette.dark};
-  border-radius: 20px;
-  cursor: pointer;
 `;
 
 const CategoryGroupDiv = styled.div`
@@ -63,89 +65,105 @@ const ColoredH1 = styled.h1`
   color: ${palette.primary};
 `;
 
-const tempProjects = Array(10).fill(1);
+interface IProjectListProps {}
 
-interface IProjectListProps {
-  title: string;
-  firstCategories?: string[];
-  secondCategories: string[];
-}
+const tagsData = ['기획자', '디자이너', '프론트엔드', '백엔드', '기타'];
 
-const ProjectList = ({ title, firstCategories = [], secondCategories }: IProjectListProps) => {
-  const [isSelect, setIsSelect] = useState<boolean[]>(Array(firstCategories.length).fill(false));
+const items: TabsProps['items'] = [
+  {
+    key: '1',
+    label: `전체`,
+    children: `Content of Tab Pane 1`,
+  },
+  {
+    key: '2',
+    label: `최신순`,
+    children: `Content of Tab Pane 2`,
+  },
+  {
+    key: '3',
+    label: `인기순`,
+    children: `Content of Tab Pane 3`,
+  },
+];
+
+const ProjectList = () => {
+  const [selectedTags, setSelectedTags] = useState<string[]>(['기획자']);
+
+  const handleChange = (tag: string, checked: boolean) => {
+    const nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter((t) => t !== tag);
+    console.log('You are interested in: ', nextSelectedTags);
+    setSelectedTags(nextSelectedTags);
+  };
+
   const navigate = useNavigate();
 
   const onClickProject = (projectId: string) => {
     navigate(`/project/${projectId}`);
   };
 
-  const onClickCategory = (index: number) => {
-    let temp = [...isSelect];
-    temp[index] = !temp[index];
-    setIsSelect(temp);
-  };
-
-  const [items, setItems] = useState(
+  const [projects, setProjects] = useState(
     Array(6).fill({
       img: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
       title: 'title',
+      author: 'jiheon',
+      date: '2023-01-28',
     }),
   );
   const fetchData = () => {
     console.log(1);
 
     setTimeout(() => {
-      setItems(
-        items.concat(
+      setProjects(
+        projects.concat(
           Array(6).fill({
             img: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
             title: 'title',
+            author: 'jiheon',
+            date: '2023-01-28',
           }),
         ),
       );
     }, 1000);
   };
 
+  const onChange = (key: string) => {
+    console.log(key);
+  };
+
   return (
     <>
-      <ColoredH1>{title}</ColoredH1>
-      <CategoryGroupDiv>
-        {firstCategories ? (
-          <>
-            {firstCategories.map((category, index) => (
-              <CategoryDiv
-                key={category}
-                isSelected={isSelect[index]}
-                onClick={() => {
-                  console.log(index);
-                  onClickCategory(index);
-                }}
-              >
-                {category}
-              </CategoryDiv>
-            ))}
-          </>
-        ) : (
-          <></>
-        )}
-      </CategoryGroupDiv>
+      <ColoredH1>{projects.length}개의 스프린트 프로젝트가 매칭되었어요.</ColoredH1>
 
-      <CategoryGroupDiv>
-        {secondCategories.map((categoryOfProject) => (
-          <ProjectTypeDiv key={categoryOfProject}>{categoryOfProject}</ProjectTypeDiv>
+      <Space size={[0, 8]} wrap>
+        {tagsData.map((tag) => (
+          <CheckableTag
+            key={tag}
+            checked={selectedTags.includes(tag)}
+            onChange={(checked) => handleChange(tag, checked)}
+          >
+            {tag}
+          </CheckableTag>
         ))}
-      </CategoryGroupDiv>
+      </Space>
 
-      <InfiniteScroll dataLength={items.length} next={fetchData} hasMore={true} loader={<h4>Loading...</h4>}>
+      <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+
+      <InfiniteScroll dataLength={projects.length} next={fetchData} hasMore={true} loader={<h4>Loading...</h4>}>
         <ProjectListDiv>
-          {items.map((item, index) => (
+          {projects.map((item, index) => (
             <Card
               key={index}
+              bordered={false}
               hoverable
               cover={<img alt="example" src={item.img} />}
               onClick={() => onClickProject(item.title)}
             >
-              <Meta title={item.title + index} description="description" />
+              <Meta
+                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+                title={item.title + index}
+                description="description"
+              />
             </Card>
           ))}
         </ProjectListDiv>
