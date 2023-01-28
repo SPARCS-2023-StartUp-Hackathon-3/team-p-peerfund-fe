@@ -1,5 +1,4 @@
 import React, { FunctionComponent, CSSProperties } from 'react';
-// import DefaultLayout from '@/components/DefaultLayout';
 import ProjectList from '@/components/ProjectList';
 import styled from 'styled-components';
 

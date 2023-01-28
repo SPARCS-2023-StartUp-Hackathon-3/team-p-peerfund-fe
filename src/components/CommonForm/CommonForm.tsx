@@ -61,6 +61,7 @@ const CommonForm: FunctionComponent<ICommonFormProps> = (props) => {
         onFieldsChange?.(changedFields, allFields);
       }}
       {...formCols}
+      style={{ width: '100%' }}
     >
       {children}
     </Form>
