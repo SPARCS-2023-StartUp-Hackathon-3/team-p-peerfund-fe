@@ -3,7 +3,7 @@ import { Account } from 'meta/accountMeta';
 
 const login = (email: string, password: string) =>
   axiosInstance
-    .post('/user/sign-in', {
+    .post('/auth/sign-in', {
       id: email,
       password,
     })
@@ -20,12 +20,14 @@ const getAccount = () =>
     return data;
   });
 
-const register = (account: Account) =>
-  axiosInstance.put('/user/sign-up', account).then((res: any) => {
+const register = (account: Account) => {
+  console.log('register', account);
+  return axiosInstance.post('/auth/sign-up', account).then((res: any) => {
     const { data } = res;
     console.log('register data', data);
     return data;
   });
+};
 
 export default {
   login,
