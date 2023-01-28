@@ -7,6 +7,7 @@ const palette = {
   lightgrey: '#f6f7f9',
   shadowgrey: '#dbdbdb',
   white: '#ffffff',
+  mint: '#2ED6BE',
 };
 
 export default palette;
