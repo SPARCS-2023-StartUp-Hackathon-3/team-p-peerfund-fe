@@ -28,10 +28,10 @@ const SignIn: FunctionComponent<ISignInProps> = (props) => {
         console.log('');
         setToken(token);
         localStorage.setItem('jwt', token);
-        navigate('/');
+        location.href = '/';
       });
     },
-    [navigate, setToken],
+    [setToken],
   );
 
   return (

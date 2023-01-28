@@ -1,10 +1,10 @@
 import axiosInstance from '@/api/AxiosInstance';
 import { Account } from 'meta/accountMeta';
 
-const login = (email: string, password: string) =>
+const login = (userName: string, password: string) =>
   axiosInstance
     .post('/auth/sign-in', {
-      id: email,
+      userName,
       password,
     })
     .then((res: any) => {

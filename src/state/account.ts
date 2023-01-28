@@ -12,12 +12,11 @@ const accountState = selector<any>({
     console.log('accountState', token);
     if (!isEmpty(token)) {
       AxiosInstance.defaults.headers['Authorization'] = `Bearer ${token}`;
+      console.log('accountState', 1);
       try {
-        const { id, userName } = await getAccount();
-        return {
-          id,
-          userName,
-        };
+        const account = await getAccount();
+        console.log('accountState', 2);
+        return account;
       } catch (e) {
         console.error('getAccount error', e);
         localStorage.removeItem('jwt');

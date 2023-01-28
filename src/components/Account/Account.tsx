@@ -5,8 +5,6 @@ import SignIn from '@/components/SignIn';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { token as tokenState, account as accountState } from '@/state';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
-
-import { useNavigate } from 'react-router-dom';
 import isEmpty from '@/utils/isEmpty';
 
 interface IAccountProps {}
@@ -14,7 +12,6 @@ interface IAccountProps {}
 const Account: FunctionComponent<IAccountProps> = (props) => {
   const [token, setToken] = useRecoilState(tokenState);
   const account = useRecoilValue(accountState);
-  const navigate = useNavigate();
 
   useEffect(() => {
     console.log('account', account);
@@ -23,8 +20,8 @@ const Account: FunctionComponent<IAccountProps> = (props) => {
   const logout = useCallback(() => {
     localStorage.removeItem('jwt');
     setToken('');
-    navigate('/');
-  }, [navigate, setToken]);
+    location.href = '/';
+  }, [setToken]);
 
   const assignRenderer = useMemo(() => {
     console.log('account', account);
@@ -33,7 +30,7 @@ const Account: FunctionComponent<IAccountProps> = (props) => {
     } else if (isEmpty(account)) {
       return <Spin size={'small'} />;
     } else {
-      const { userName, name, roleType } = account;
+      const { id, name, roleType, userName } = account;
       return (
         <Badge.Ribbon text={roleType}>
           <Card

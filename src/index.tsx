@@ -12,6 +12,7 @@ import { ConfigProvider } from 'antd';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
+    {/* @ts-ignore */}
     <RecoilRoot>
       <ConfigProvider theme={theme}>
         <App />
