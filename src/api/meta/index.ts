@@ -1,19 +1,7 @@
-const config = {
-  baseURL: 'https://dongholab.com',
+const prodConfig = {
+  baseURL: 'http://ec2-54-180-159-18.ap-northeast-2.compute.amazonaws.com:8080',
   timeout: 2500,
   headers: { 'Content-Type': 'application/json' },
 };
 
-const devConfig = {
-  baseURL: 'https://dev.dongholab.com',
-  timeout: 2500,
-  headers: { 'Content-Type': 'application/json' },
-};
-
-const localConfig = {
-  baseURL: 'http://localhost:5000',
-  timeout: 2500,
-  headers: { 'Content-Type': 'application/json' },
-};
-
-export default localConfig;
+export default prodConfig;
