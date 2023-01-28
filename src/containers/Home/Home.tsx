@@ -1,25 +1,56 @@
 import React, { FunctionComponent, CSSProperties } from 'react';
+import styled from 'styled-components';
 import DefaultLayout from '@/components/DefaultLayout';
 import Banner from '@/components/Banner';
 import ProjectList from '@/components/ProjectList';
+import Background from '@/style/background.png';
 
 interface ICardViewProps {}
+
+const BackgroundDiv = styled.div`
+  background-image: url(${Background});
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+`;
+
+const HomeBoxDiv = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 85%;
+  height: 80%;
+`;
+
+const LeftBoxDiv = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: rgba(207, 207, 207, 0.3);
+  border-radius: 50px;
+`;
+const RightBoxDiv = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 50px;
+`;
 
 interface Props {
   style?: CSSProperties;
 }
 
 const Home: FunctionComponent<ICardViewProps> = (props) => {
-  const jobTypes = ['기획자', '디자이너', '프론트엔드', '백엔드', '기타'];
-  const projectTypes = ['전체', '프로젝트', '스터디'];
-  const fundingStatus = ['전체', '펀딩 진행중', '공개예정'];
-
   return (
-    <DefaultLayout>
-      <Banner />
-      <ProjectList title={'주목 할 만한 모집 공고'} firstCategories={jobTypes} secondCategories={projectTypes} />
-      <ProjectList title={'주목 할 만한 프로젝트'} secondCategories={fundingStatus} />
-    </DefaultLayout>
+    <BackgroundDiv>
+      <HomeBoxDiv>
+        <LeftBoxDiv></LeftBoxDiv>
+        <RightBoxDiv></RightBoxDiv>
+      </HomeBoxDiv>
+    </BackgroundDiv>
   );
 };
 

@@ -11,15 +11,16 @@ import { useRecoilValue } from 'recoil';
 import accountState from '@/state/account';
 import MenuPopOver from '@/components/MenuPopOver';
 import { UserOutlined } from '@ant-design/icons';
-
-const { primary } = palette;
+import logo from '@/style/logo.png';
+const { white } = palette;
 
 interface INavBarProps {}
 
 const menuStyle = {
   width: '100%',
   display: 'flex',
-  backgroundColor: primary,
+  backgroundColor: 'white',
+  color: '#333',
 };
 
 const nextRouter = (prev: any[], next: any, componentKey: string) => {
@@ -82,18 +83,19 @@ const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
 
   return (
     <Layout style={{ flex: 'none' }}>
-      <Header className="header" style={{ display: 'flex', backgroundColor: primary }}>
-        <div
+      <Header className="header" style={{ display: 'flex', backgroundColor: white }}>
+        <img src={logo} alt="logo" width="200" className="logo" />
+        {/* <div
           className="logo"
           style={{
-            color: 'white',
+            color: palette.dark,
             width: 250,
             cursor: 'pointer',
           }}
         >
           {fm({ id: 'title' })}
-        </div>
-        <Menu theme="dark" mode="horizontal" style={menuStyle} activeKey={location.pathname} selectable={false}>
+        </div> */}
+        <Menu theme="light" mode="horizontal" style={menuStyle} activeKey={location.pathname} selectable={false}>
           {defaultMenus.map(({ componentKey, path }) => (
             <Menu.Item key={path}>
               <Link to={path}>

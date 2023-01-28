@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '@/style/palette';
 import { Card } from 'antd';
-
+import InfiniteScroll from 'react-infinite-scroll-component';
 const { Meta } = Card;
 
 const ProjectListDiv = styled.div`
@@ -85,10 +85,30 @@ const ProjectList = ({ title, firstCategories = [], secondCategories }: IProject
     setIsSelect(temp);
   };
 
+  const [items, setItems] = useState(
+    Array(6).fill({
+      img: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
+      title: 'title',
+    }),
+  );
+  const fetchData = () => {
+    console.log(1);
+
+    setTimeout(() => {
+      setItems(
+        items.concat(
+          Array(6).fill({
+            img: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
+            title: 'title',
+          }),
+        ),
+      );
+    }, 1000);
+  };
+
   return (
     <>
       <ColoredH1>{title}</ColoredH1>
-
       <CategoryGroupDiv>
         {firstCategories ? (
           <>
@@ -115,19 +135,21 @@ const ProjectList = ({ title, firstCategories = [], secondCategories }: IProject
           <ProjectTypeDiv key={categoryOfProject}>{categoryOfProject}</ProjectTypeDiv>
         ))}
       </CategoryGroupDiv>
-      <ProjectListDiv>
-        {tempProjects.map((tempProject, index) => (
-          <Card
-            key={index}
-            hoverable
-            cover={<img alt="example" src={'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png'} />}
-            onClick={() => onClickProject(tempProject)}
-          >
-            <Meta title="title" description="description" />
-          </Card>
-          // <ProjectItemDiv key={index} onClick={() => onClickProject(tempProject)}></ProjectItemDiv>
-        ))}
-      </ProjectListDiv>
+
+      <InfiniteScroll dataLength={items.length} next={fetchData} hasMore={true} loader={<h4>Loading...</h4>}>
+        <ProjectListDiv>
+          {items.map((item, index) => (
+            <Card
+              key={index}
+              hoverable
+              cover={<img alt="example" src={item.img} />}
+              onClick={() => onClickProject(item.title)}
+            >
+              <Meta title={item.title + index} description="description" />
+            </Card>
+          ))}
+        </ProjectListDiv>
+      </InfiniteScroll>
     </>
   );
 };
