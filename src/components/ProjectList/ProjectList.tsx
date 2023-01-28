@@ -103,28 +103,19 @@ const ProjectList = () => {
     navigate(`/project/${projectId}`);
   };
 
-  const [projects, setProjects] = useState(
-    Array(6).fill({
-      img: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
-      title: 'title',
-      author: 'jiheon',
-      date: '2023-01-28',
-    }),
-  );
+  const dummyData = Array(6).fill({
+    img: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
+    title: 'title',
+    author: 'jiheon',
+    date: '2023-01-28 ~ 02.03',
+  });
+
+  const [projects, setProjects] = useState(dummyData);
   const fetchData = () => {
     console.log(1);
 
     setTimeout(() => {
-      setProjects(
-        projects.concat(
-          Array(6).fill({
-            img: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
-            title: 'title',
-            author: 'jiheon',
-            date: '2023-01-28',
-          }),
-        ),
-      );
+      setProjects(projects.concat(dummyData));
     }, 1000);
   };
 
@@ -153,8 +144,8 @@ const ProjectList = () => {
       <InfiniteScroll dataLength={projects.length} next={fetchData} hasMore={true} loader={<h4>Loading...</h4>}>
         <ProjectListDiv>
           {projects.map((item, index) => {
-            const { title, author } = item;
-            return <Project key={index} id={index} title={title} author={author} />;
+            const { title, author, date } = item;
+            return <Project key={index} id={index} title={title} date={date} author={author} />;
           })}
         </ProjectListDiv>
       </InfiniteScroll>
