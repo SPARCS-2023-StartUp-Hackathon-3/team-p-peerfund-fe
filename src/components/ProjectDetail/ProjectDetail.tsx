@@ -1,20 +1,23 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import DefaultLayout from '@/components/DefaultLayout';
 import { useNavigate } from 'react-router-dom';
-import { Input, Button, Descriptions, Row, Col } from 'antd';
+import { Input, Button, Descriptions, Row, Col, Avatar } from 'antd';
 import {
   CommentUl,
   Commentli,
   DarkH1,
-  InfoGridDiv,
   ProfileImg,
   ProjectDescription,
   ProjectInfoDiv,
+  ProfileCard,
 } from './ProjectDetailStyles';
 import FlexCenter from '@/components/FlexCenter';
-import { tempData, tempComments } from './mock';
+import { tempData, tempComments, tempTeams } from './mock';
 import { generateIndexImage } from '@/utils';
-import ToolIcon from '../ToolIcon/ToolIcon';
+import ToolIcon from '@/components/ToolIcon';
+import palette from '@/style/palette';
+
+const { dark } = palette;
 const { TextArea } = Input;
 
 interface IProjectDetailProps {
@@ -67,13 +70,18 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
       <ProjectInfoDiv>
         <div style={{ gap: '30px', display: 'flex', flexDirection: 'column' }}>
           <DarkH1>{tempData.title}</DarkH1>
-          <div style={{ gap: '10px', display: 'flex', alignContent: 'center' }}>
+          <FlexCenter>
             <ProfileImg />
-            <span>{tempData.author}</span>
-            <span>{tempData.date}</span>
-          </div>
+            <span style={{ marginLeft: 10 }}>{tempData.author}</span>
+            <span style={{ marginLeft: 20 }}>{tempData.date}</span>
+          </FlexCenter>
         </div>
-        <Button type="primary" onClick={onClickApplyBtn}>
+        <Button
+          type="primary"
+          size="large"
+          style={{ borderRadius: 20, paddingLeft: 30, paddingRight: 30 }}
+          onClick={onClickApplyBtn}
+        >
           지원하기
         </Button>
       </ProjectInfoDiv>
@@ -95,8 +103,8 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
         </Col>
         <Col {...descriptionColumns}>
           <FlexCenter style={{ padding: 15, height: '100%' }}>
-            <ProjectDescription>
-              <Descriptions column={1}>
+            <ProjectDescription style={{ width: 'auto' }}>
+              <Descriptions column={1} bordered>
                 <Descriptions.Item label="진행 날짜">{`${tempData.start_date} ~ ${tempData.end_date}`}</Descriptions.Item>
                 <Descriptions.Item label="아이디어">있음</Descriptions.Item>
                 <Descriptions.Item label="Deposit">
@@ -105,7 +113,7 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
                 <Descriptions.Item label="구인 직무 1">
                   <div>
                     <div>디자이너, 2명</div>
-                    <FlexCenter>
+                    <FlexCenter style={{ justifyContent: 'start' }}>
                       <ToolIcon tool="figma" />
                       <ToolIcon tool="xd" type="plain" style={{ marginLeft: 5 }} />
                     </FlexCenter>
@@ -114,7 +122,7 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
                 <Descriptions.Item label="구인 직무 2">
                   <div>
                     <div>백엔드 개발자, 1명</div>
-                    <FlexCenter>
+                    <FlexCenter style={{ justifyContent: 'start' }}>
                       <ToolIcon tool="typescript" />
                       <ToolIcon tool="docker" type="plain" style={{ marginLeft: 5 }} />
                       <ToolIcon tool="spring" style={{ marginLeft: 5 }} />
@@ -136,19 +144,33 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
       <ProjectInfoDiv>
         <DarkH1>참여자 프로필</DarkH1>
       </ProjectInfoDiv>
-      <div style={{ marginBottom: '30px', wordBreak: 'keep-all', padding: 5 }}>{tempData.content}</div>
+      <FlexCenter style={{ marginBottom: '80px', justifyContent: 'start', padding: 5 }}>
+        {tempTeams.map(({ image, position, name }, i) => (
+          <ProfileCard key={i}>
+            <Avatar src={image} />
+            <div>
+              <span className="position">{position}</span>
+              <span className="name">{name}</span>
+            </div>
+          </ProfileCard>
+        ))}
+      </FlexCenter>
 
       <DarkH1>{tempComments.length}개의 댓글이 있습니다.</DarkH1>
-      <TextArea
-        rows={3}
-        placeholder="댓글을 달아주세요."
-        size="large"
-        name="comment"
-        value={commentData.comment}
-        onChange={onChangeComment}
-      />
+      <FlexCenter style={{ flexDirection: 'column', marginTop: 5 }}>
+        <TextArea
+          rows={4}
+          placeholder="댓글을 달아주세요."
+          size="large"
+          name="comment"
+          value={commentData.comment}
+          onChange={onChangeComment}
+        />
 
-      <Button type="primary">등록하기</Button>
+        <Button type="primary" size="large" style={{ marginTop: 10, marginLeft: 'auto', backgroundColor: dark }}>
+          등록하기
+        </Button>
+      </FlexCenter>
       <CommentUl>
         {tempComments.map((comment, index) => (
           <Commentli key={index}>

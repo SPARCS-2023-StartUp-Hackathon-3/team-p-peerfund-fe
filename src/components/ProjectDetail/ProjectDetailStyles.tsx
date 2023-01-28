@@ -51,3 +51,37 @@ export const Commentli = styled.li`
   display: flex;
   justify-content: space-between;
 `;
+
+export const ProfileCard = styled.div`
+  border: 1px solid ${dark};
+  border-radius: 16px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+  padding: 5px 16px;
+  margin-left: 8px;
+  margin-right: 8px;
+
+  & > div {
+    padding: 5px;
+    padding-left: 12px;
+    & > .position {
+      display: block;
+      font-size: 14px;
+    }
+
+    & > .name {
+      padding-top: 6px;
+      display: block;
+      font-weight: 700;
+    }
+  }
+`;

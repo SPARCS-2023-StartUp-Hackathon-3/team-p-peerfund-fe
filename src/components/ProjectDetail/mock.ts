@@ -1,3 +1,7 @@
+import firstImage from './image/jessica-felicio-_cvwXhGqG-o-unsplash.jpg';
+import secondImage from './image/albert-dera-ILip77SbmOE-unsplash.jpg';
+import thirdImage from './image/ospan-ali-mGdA2fzjWLo-unsplash.jpg';
+
 export const tempData = {
   author: 'jiheon788',
   date: '2023-01-01',
@@ -23,5 +27,23 @@ export const tempComments = [
   {
     author: 'sparcs',
     content: '조금씩 타 범위를 공부하기 시작했',
+  },
+];
+
+export const tempTeams = [
+  {
+    image: firstImage,
+    position: '디자인',
+    name: '정재민',
+  },
+  {
+    image: secondImage,
+    position: '개발자',
+    name: '강동호',
+  },
+  {
+    image: thirdImage,
+    position: '기획자',
+    name: '김유빈',
   },
 ];
