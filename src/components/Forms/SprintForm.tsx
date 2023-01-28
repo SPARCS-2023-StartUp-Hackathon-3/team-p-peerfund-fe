@@ -1,4 +1,4 @@
-import React, { FunctionComponent, CSSProperties, useState } from 'react';
+import React, { useState } from 'react';
 import CommonForm from '@/components/CommonForm';
 import { fullColumn } from './meta';
 
@@ -65,7 +65,7 @@ const SprintForm = () => {
               <Radio.Button value="false">무</Radio.Button>
             </Radio.Group>
           </Form.Item>
-          <Button type="primary" style={{ display: 'inline-block' }} shape="round" size="large">
+          <Button type="primary" style={{ display: 'inline-block' }} shape="round" size="large" htmlType="submit">
             등록하기
           </Button>
         </div>

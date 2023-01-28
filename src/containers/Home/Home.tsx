@@ -2,7 +2,7 @@ import React, { FunctionComponent, CSSProperties, useState } from 'react';
 import styled from 'styled-components';
 import Background from '@/style/background.png';
 import FormSelector, { FormType } from '@/components/Forms/FormSwitcher';
-import { ConfigProvider, Button } from 'antd';
+import { ConfigProvider } from 'antd';
 import palette from '@/style/palette';
 interface ICardViewProps {}
 
