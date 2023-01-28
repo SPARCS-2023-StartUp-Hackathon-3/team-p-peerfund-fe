@@ -8,7 +8,7 @@ export type RouterMetaTypes = {
 
 const routerMeta: RouterMetaTypes = {
   Home: { path: '/' },
-  About: ['/about', '/test'],
+  Peer: { path: '/peer' },
   Project: '/project/:projectId',
   TestForm: '/testform',
 };

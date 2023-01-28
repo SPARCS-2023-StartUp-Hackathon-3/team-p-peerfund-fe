@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import palette from '@/style/palette';
 import { Input, Button, Modal } from 'antd';
 import { useParams } from 'react-router-dom';
-import ApplyModal from '@/components/ApplyModal';
 const { TextArea } = Input;
 
 const DarkH1 = styled.h1`
@@ -112,7 +111,18 @@ const Project = () => {
           지원하기
         </Button>
 
-        <ApplyModal title={tempData.title} isModalOpen={isModalOpen} toggleModal={toggleModal}></ApplyModal>
+        <Modal
+          title={tempData.title}
+          centered
+          open={isModalOpen}
+          onOk={toggleModal}
+          onCancel={toggleModal}
+          width={1200}
+        >
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Modal>
       </ProjectInfoDiv>
       <InfoGridDiv>
         <span>모집 구분</span>
@@ -138,7 +148,7 @@ const Project = () => {
         onChange={onChangeComment}
       />
 
-      <button type="button">등록하기</button>
+      <Button type="primary">등록하기</Button>
       <CommentUl>
         {tempComments.map((comment, index) => (
           <Commentli key={index}>
