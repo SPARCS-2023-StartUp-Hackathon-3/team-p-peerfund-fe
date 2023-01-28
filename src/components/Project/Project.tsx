@@ -50,11 +50,8 @@ const Project: FunctionComponent<IProjectProps> = (props) => {
             }}
           />
         }
-        onClick={(e: any) => {
-          e.view.preventDefault();
-          e.view.stopPropagation();
+        onClick={() => {
           onClickProject(id);
-          return false;
         }}
       >
         <Title>{title}</Title>
@@ -67,7 +64,12 @@ const Project: FunctionComponent<IProjectProps> = (props) => {
             </div>
           }
           description={
-            <FlexCenter>
+            <FlexCenter
+              onClick={(e: any) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
+            >
               <Heart
                 style={{ width: 28 }}
                 activeColor={primary}

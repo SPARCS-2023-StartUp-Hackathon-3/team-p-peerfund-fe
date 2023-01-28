@@ -3,6 +3,7 @@ import { propsToStyle } from '@/utils';
 
 interface Props {
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 const FlexCenter: any = styled.div`
