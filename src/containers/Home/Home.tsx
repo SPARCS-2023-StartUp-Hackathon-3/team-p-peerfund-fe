@@ -18,7 +18,6 @@ const Home: FunctionComponent<ICardViewProps> = (props) => {
     <DefaultLayout>
       <Banner />
       <ProjectList title={'주목 할 만한 모집 공고'} firstCategories={jobTypes} secondCategories={projectTypes} />
-      <ProjectList title={'주목 할 만한 프로젝트'} secondCategories={fundingStatus} />
     </DefaultLayout>
   );
 };

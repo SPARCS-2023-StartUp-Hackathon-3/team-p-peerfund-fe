@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '@/style/palette';
-import { Card } from 'antd';
+import { Card, Layout, Row, Col, Grid, Spin } from 'antd';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import Temp from '../Temp';
 
 const { Meta } = Card;
 
@@ -63,8 +65,6 @@ const ColoredH1 = styled.h1`
   color: ${palette.primary};
 `;
 
-const tempProjects = Array(10).fill(1);
-
 interface IProjectListProps {
   title: string;
   firstCategories?: string[];
@@ -85,6 +85,22 @@ const ProjectList = ({ title, firstCategories = [], secondCategories }: IProject
     setIsSelect(temp);
   };
 
+  const [items, setItems] = useState(Array.from({ length: 30 }));
+
+  useEffect(() => {
+    console.log(items);
+  }, [items]);
+  // https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png
+
+  const fetchData = () => {
+    console.log(1);
+    setTimeout(() => {
+      let temp = items;
+      temp.concat(Array.from({ length: 40 }));
+      setItems(temp);
+    }, 500);
+  };
+
   return (
     <>
       <ColoredH1>{title}</ColoredH1>
@@ -97,7 +113,6 @@ const ProjectList = ({ title, firstCategories = [], secondCategories }: IProject
                 key={category}
                 isSelected={isSelect[index]}
                 onClick={() => {
-                  console.log(index);
                   onClickCategory(index);
                 }}
               >
@@ -115,19 +130,8 @@ const ProjectList = ({ title, firstCategories = [], secondCategories }: IProject
           <ProjectTypeDiv key={categoryOfProject}>{categoryOfProject}</ProjectTypeDiv>
         ))}
       </CategoryGroupDiv>
-      <ProjectListDiv>
-        {tempProjects.map((tempProject, index) => (
-          <Card
-            key={index}
-            hoverable
-            cover={<img alt="example" src={'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png'} />}
-            onClick={() => onClickProject(tempProject)}
-          >
-            <Meta title="title" description="description" />
-          </Card>
-          // <ProjectItemDiv key={index} onClick={() => onClickProject(tempProject)}></ProjectItemDiv>
-        ))}
-      </ProjectListDiv>
+
+      <Temp />
     </>
   );
 };
