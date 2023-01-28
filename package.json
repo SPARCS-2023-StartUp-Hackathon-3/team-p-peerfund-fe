@@ -52,7 +52,10 @@
     "prettier": "prettier --write --config ./.prettierrc \"**/*.{ts,tsx}\"",
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "lint:fix": "eslint --fix './src/**/*.{ts,tsx}'",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docker-build": "docker build -t peerfund/frontend .",
+    "docker-run": "docker run -d -p 80:80 peerfund/frontend:latest",
+    "docker-deploy": "docker push peerfund/frontend"
   },
   "eslintConfig": {
     "extends": [
