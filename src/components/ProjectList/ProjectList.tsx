@@ -13,8 +13,8 @@ const ProjectListDiv = styled.div`
 `;
 
 const ProjectItemDiv = styled.div`
-  width: 400px;
-  height: 450px;
+  width: 100%;
+  min-height: 400px;
   background-color: ${palette.dark};
   border-radius: 20px;
   cursor: pointer;
