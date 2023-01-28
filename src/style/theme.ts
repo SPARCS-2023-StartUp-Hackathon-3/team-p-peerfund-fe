@@ -5,6 +5,7 @@ const theme = {
   token: {
     colorPrimary: primary,
     fontFamily: 'NanumSquareRound',
+    wireframe: true,
   },
 };
 export default theme;

@@ -10,7 +10,7 @@ const MenuPopOver: FunctionComponent<IMenuPopOverProps & PopoverProps> = ({ butt
   return (
     <div>
       <Popover placement="bottomRight" trigger="click" {...buttonProps}>
-        <Button style={{ border: 'none' }} ghost>
+        <Button style={{ border: 'none' }} size="large" type="primary" ghost>
           {children}
         </Button>
       </Popover>

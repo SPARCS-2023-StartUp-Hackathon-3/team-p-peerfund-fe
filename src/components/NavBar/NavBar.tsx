@@ -1,10 +1,11 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useMemo } from 'react';
 import { Layout, Menu } from 'antd';
 const { Header } = Layout;
 import { routerMeta } from '@/meta';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { assignRouteArrayProps, isEmpty } from '@/utils';
-import { useIntl } from 'react-intl';
 import palette from '@/style/palette';
 import Account from '@/components/Account';
 import { useRecoilValue } from 'recoil';
@@ -12,15 +13,17 @@ import accountState from '@/state/account';
 import MenuPopOver from '@/components/MenuPopOver';
 import { UserOutlined } from '@ant-design/icons';
 import logo from '@/style/logo.png';
-const { white } = palette;
+
+const { primary, white, dark, shadowgrey } = palette;
 
 interface INavBarProps {}
 
 const menuStyle = {
   width: '100%',
   display: 'flex',
-  backgroundColor: 'white',
-  color: '#333',
+  backgroundColor: white,
+  color: dark,
+  borderBottom: 'unset',
 };
 
 const nextRouter = (prev: any[], next: any, componentKey: string) => {
@@ -56,7 +59,7 @@ const defaultMenus: any[] = Object.keys(routerMeta).reduce((prev: any[], compone
 }, []);
 
 const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
-  const { formatMessage: fm } = useIntl();
+  const navigate = useNavigate();
   const account = useRecoilValue(accountState);
   const location = useLocation();
 
@@ -83,18 +86,29 @@ const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
 
   return (
     <Layout style={{ flex: 'none' }}>
-      <Header className="header" style={{ display: 'flex', backgroundColor: white }}>
-        <img src={logo} alt="logo" width="200" className="logo" />
-        {/* <div
+      <Header
+        className="header"
+        style={{
+          display: 'flex',
+          backgroundColor: white,
+          color: primary,
+          borderBottom: `1px solid ${shadowgrey}`,
+        }}
+      >
+        <div
           className="logo"
           style={{
-            color: palette.dark,
-            width: 250,
+            display: 'flex',
+            width: 160,
+            flex: 'none',
             cursor: 'pointer',
+            backgroundPosition: 'center',
+            backgroundSize: 'contain',
+            backgroundImage: `url(${logo})`,
+            backgroundRepeat: 'no-repeat',
           }}
-        >
-          {fm({ id: 'title' })}
-        </div> */}
+          onClick={() => navigate('/')}
+        />
         <Menu theme="light" mode="horizontal" style={menuStyle} activeKey={location.pathname} selectable={false}>
           {defaultMenus.map(({ componentKey, path }) => (
             <Menu.Item key={path}>

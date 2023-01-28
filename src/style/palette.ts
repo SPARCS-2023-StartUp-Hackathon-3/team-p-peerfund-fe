@@ -5,6 +5,7 @@ const palette = {
   darkGrey: '#777777',
   grey: '#939090',
   lightgrey: '#f6f7f9',
+  shadowgrey: '#dbdbdb',
   white: '#ffffff',
 };
 
