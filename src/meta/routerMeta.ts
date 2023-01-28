@@ -20,7 +20,7 @@ const routerMeta: RouterMetaTypes = {
     account: false,
     hide: true,
   },
-  Project: '/project/:projectId',
+  Detail: '/project/:projectId',
   Apply: '/apply/:projectId',
   TestForm: '/testform',
 };
