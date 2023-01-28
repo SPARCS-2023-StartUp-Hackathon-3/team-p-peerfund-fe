@@ -5,7 +5,9 @@ import { useLocation } from 'react-router-dom';
 
 const { Content } = Layout;
 
-interface IDefaultLayoutProps {}
+interface IDefaultLayoutProps {
+  children?: any;
+}
 
 const defaultStyle = {
   // height: "100%",

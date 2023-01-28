@@ -2,12 +2,13 @@ import React, { FunctionComponent, useState } from 'react';
 import { Select } from 'antd';
 import FormSelector, { FormType } from '@/components/Forms/FormSwitcher';
 import DefaultLayout from '@/components/DefaultLayout';
+import { $enum } from 'ts-enum-util';
 
 interface ITestFormProps {}
 
 console.log('FormType', Object.keys(FormType));
-const typeOptions = Object.keys(FormType)
-  .splice(1, 1)
+const typeOptions = $enum(FormType)
+  .getKeys()
   .map((type) => ({ value: type, label: type }));
 const initValue = typeOptions?.[0].value;
 

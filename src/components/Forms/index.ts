@@ -1,1 +1,2 @@
-export { default as ProjectForm } from './ProjectFrom';
+export { default as ProjectForm } from './ProjectForm';
+export { default as FundingForm } from './FundingForm';
