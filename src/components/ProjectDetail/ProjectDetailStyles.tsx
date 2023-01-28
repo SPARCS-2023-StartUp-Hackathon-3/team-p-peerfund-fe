@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const { dark } = palette;
 
-export const DarkH1 = styled.h1`
-  font-size: 29px;
+export const DarkH1 = styled.span`
+  font-size: 22px;
   font-weight: bold;
 `;
 
@@ -12,9 +12,17 @@ export const ProjectInfoDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 20px 0;
+  padding: 15px 0;
   border-bottom: 0.02rem solid ${dark};
-  margin: 30px 0;
+  margin: 15px 0;
+`;
+
+export const ProjectDescription = styled.div`
+  & .ant-descriptions-view {
+    & .ant-descriptions-item-label {
+      font-weight: bold;
+    }
+  }
 `;
 
 export const ProfileImg = styled.div`

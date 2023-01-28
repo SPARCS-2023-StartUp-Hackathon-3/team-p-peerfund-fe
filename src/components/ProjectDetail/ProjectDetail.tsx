@@ -2,7 +2,15 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import DefaultLayout from '@/components/DefaultLayout';
 import { useNavigate } from 'react-router-dom';
 import { Input, Button, Descriptions, Row, Col } from 'antd';
-import { CommentUl, Commentli, DarkH1, InfoGridDiv, ProfileImg, ProjectInfoDiv } from './ProjectDetailStyles';
+import {
+  CommentUl,
+  Commentli,
+  DarkH1,
+  InfoGridDiv,
+  ProfileImg,
+  ProjectDescription,
+  ProjectInfoDiv,
+} from './ProjectDetailStyles';
 import FlexCenter from '@/components/FlexCenter';
 import { tempData, tempComments } from './mock';
 import { generateIndexImage } from '@/utils';
@@ -87,32 +95,34 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
         </Col>
         <Col {...descriptionColumns}>
           <FlexCenter style={{ padding: 15, height: '100%' }}>
-            <Descriptions column={1}>
-              <Descriptions.Item label="진행 날짜">{`${tempData.start_date} ~ ${tempData.end_date}`}</Descriptions.Item>
-              <Descriptions.Item label="아이디어">있음</Descriptions.Item>
-              <Descriptions.Item label="Deposit">
-                <b>1</b> 만원
-              </Descriptions.Item>
-              <Descriptions.Item label="구인 직무 1">
-                <div>
-                  <div>디자이너, 2명</div>
-                  <FlexCenter>
-                    <ToolIcon tool="figma" />
-                    <ToolIcon tool="xd" type="plain" style={{ marginLeft: 5 }} />
-                  </FlexCenter>
-                </div>
-              </Descriptions.Item>
-              <Descriptions.Item label="구인 직무 2">
-                <div>
-                  <div>백엔드 개발자, 1명</div>
-                  <FlexCenter>
-                    <ToolIcon tool="typescript" />
-                    <ToolIcon tool="docker" type="plain" style={{ marginLeft: 5 }} />
-                    <ToolIcon tool="spring" style={{ marginLeft: 5 }} />
-                  </FlexCenter>
-                </div>
-              </Descriptions.Item>
-            </Descriptions>
+            <ProjectDescription>
+              <Descriptions column={1}>
+                <Descriptions.Item label="진행 날짜">{`${tempData.start_date} ~ ${tempData.end_date}`}</Descriptions.Item>
+                <Descriptions.Item label="아이디어">있음</Descriptions.Item>
+                <Descriptions.Item label="Deposit">
+                  <b>1</b> 만원
+                </Descriptions.Item>
+                <Descriptions.Item label="구인 직무 1">
+                  <div>
+                    <div>디자이너, 2명</div>
+                    <FlexCenter>
+                      <ToolIcon tool="figma" />
+                      <ToolIcon tool="xd" type="plain" style={{ marginLeft: 5 }} />
+                    </FlexCenter>
+                  </div>
+                </Descriptions.Item>
+                <Descriptions.Item label="구인 직무 2">
+                  <div>
+                    <div>백엔드 개발자, 1명</div>
+                    <FlexCenter>
+                      <ToolIcon tool="typescript" />
+                      <ToolIcon tool="docker" type="plain" style={{ marginLeft: 5 }} />
+                      <ToolIcon tool="spring" style={{ marginLeft: 5 }} />
+                    </FlexCenter>
+                  </div>
+                </Descriptions.Item>
+              </Descriptions>
+            </ProjectDescription>
           </FlexCenter>
         </Col>
       </Row>
@@ -121,7 +131,12 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
       <ProjectInfoDiv>
         <DarkH1>협의 필요 내용</DarkH1>
       </ProjectInfoDiv>
-      <div style={{ marginBottom: '30px' }}>{tempData.content}</div>
+      <div style={{ marginBottom: '30px', wordBreak: 'keep-all', padding: 5 }}>{tempData.content}</div>
+
+      <ProjectInfoDiv>
+        <DarkH1>참여자 프로필</DarkH1>
+      </ProjectInfoDiv>
+      <div style={{ marginBottom: '30px', wordBreak: 'keep-all', padding: 5 }}>{tempData.content}</div>
 
       <DarkH1>{tempComments.length}개의 댓글이 있습니다.</DarkH1>
       <TextArea
