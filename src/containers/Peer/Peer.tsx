@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Container = styled.div`
-  width: 85%;
+  width: 75%;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
@@ -30,7 +30,7 @@ const Peer: FunctionComponent<ICardViewProps> = (props) => {
   return (
     <Container>
       <Banner />
-      <ProjectList title={'주목 할 만한 모집 공고'} firstCategories={jobTypes} secondCategories={projectTypes} />
+      <ProjectList />
     </Container>
   );
 };
