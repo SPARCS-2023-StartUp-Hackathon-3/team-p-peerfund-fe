@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import CommonForm from '@/components/CommonForm';
 import { Divider, Form, Input, InputNumber, Select, Upload } from 'antd';
 import InnerForm from './subComponents/InnerForm';
-import { PlusCircleOutlined } from '@ant-design/icons';
 import { fullColumn } from './meta';
 import AppendFormItem from './subComponents/AppendFormItem';
 const { TextArea } = Input;
