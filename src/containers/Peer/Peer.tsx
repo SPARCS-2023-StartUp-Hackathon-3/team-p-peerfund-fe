@@ -1,6 +1,5 @@
 import React, { FunctionComponent, CSSProperties } from 'react';
-import DefaultLayout from '@/components/DefaultLayout';
-import Banner from '@/components/Banner';
+// import DefaultLayout from '@/components/DefaultLayout';
 import ProjectList from '@/components/ProjectList';
 import styled from 'styled-components';
 
@@ -11,7 +10,8 @@ interface Props {
 }
 
 const Container = styled.div`
-  width: 75%;
+  max-width: 1200px;
+  width: calc(100% - 30px);
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
@@ -29,7 +29,6 @@ const Peer: FunctionComponent<ICardViewProps> = (props) => {
 
   return (
     <Container>
-      <Banner />
       <ProjectList />
     </Container>
   );

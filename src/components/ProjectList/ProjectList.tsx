@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '@/style/palette';
-import { Card, Space, Tag, Avatar, Tabs } from 'antd';
+import { Card, Space, Tag, Avatar, Tabs, Spin } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import DefaultImg from '@/style/background.png';
 
 import type { TabsProps } from 'antd';
 import Project from '@/components/Project';
+import FlexCenter from '@/components/FlexCenter';
 const { CheckableTag } = Tag;
 
 const { Meta } = Card;
@@ -141,7 +142,16 @@ const ProjectList = () => {
 
       <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
 
-      <InfiniteScroll dataLength={projects.length} next={fetchData} hasMore={true} loader={<h4>Loading...</h4>}>
+      <InfiniteScroll
+        dataLength={projects.length}
+        next={fetchData}
+        hasMore={true}
+        loader={
+          <FlexCenter>
+            <Spin />
+          </FlexCenter>
+        }
+      >
         <ProjectListDiv>
           {projects.map((item, index) => {
             const { title, author, date } = item;
