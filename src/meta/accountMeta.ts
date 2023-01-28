@@ -3,7 +3,7 @@ interface AccountMeta {
 }
 
 export interface Account {
-  id: string;
+  userName: string;
   name: string;
   roleType: RoleType;
   password: string;

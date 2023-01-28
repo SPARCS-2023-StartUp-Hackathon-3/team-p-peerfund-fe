@@ -27,7 +27,7 @@ const Register: FunctionComponent<IRegisterProps> = (props) => {
       console.log('Success:', values);
       const { email, name, password, role_type } = values;
       const account: Account = {
-        id: email,
+        userName: email,
         name,
         password,
         roleType: role_type,
