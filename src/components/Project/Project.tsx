@@ -42,7 +42,7 @@ const Project: FunctionComponent<IProjectProps> = (props) => {
             style={{
               borderRadius: '16px 16px 0px 0px',
               width: '100%',
-              height: '300px',
+              height: '150px',
               backgroundPosition: 'center',
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat',
@@ -63,7 +63,7 @@ const Project: FunctionComponent<IProjectProps> = (props) => {
           avatar={
             <div style={{ paddingTop: 5 }}>
               <Avatar src={authorImageUrl || generateIndexImage(id)} />
-              <span style={{ marginLeft: 5 }}>{author}</span>
+              <span style={{ marginLeft: 5, fontWeight: 'bold' }}>{author}</span>
             </div>
           }
           description={
