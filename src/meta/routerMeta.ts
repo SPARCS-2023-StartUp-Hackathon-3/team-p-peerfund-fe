@@ -10,6 +10,7 @@ const routerMeta: RouterMetaTypes = {
   Home: { path: '/' },
   Peer: { path: '/peer' },
   Project: '/project/:projectId',
+  Apply: '/apply/:projectId',
   TestForm: '/testform',
 };
 

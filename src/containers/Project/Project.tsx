@@ -3,7 +3,7 @@ import DefaultLayout from '@/components/DefaultLayout';
 import styled from 'styled-components';
 import palette from '@/style/palette';
 import { Input, Button, Modal } from 'antd';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 const { TextArea } = Input;
 
 const DarkH1 = styled.h1`
@@ -75,6 +75,7 @@ const tempComments = [
 
 const Project = () => {
   const params = useParams();
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [commentData, setCommentData] = useState({
     comment: '',
@@ -92,8 +93,8 @@ const Project = () => {
     console.log(commentData);
   }, [commentData]);
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
+  const onClickApplyBtn = () => {
+    navigate(`/apply/${params.projectId}`);
   };
 
   return (
@@ -107,22 +108,9 @@ const Project = () => {
             <span>{tempData.date}</span>
           </div>
         </div>
-        <Button type="primary" onClick={toggleModal}>
+        <Button type="primary" onClick={onClickApplyBtn}>
           지원하기
         </Button>
-
-        <Modal
-          title={tempData.title}
-          centered
-          open={isModalOpen}
-          onOk={toggleModal}
-          onCancel={toggleModal}
-          width={1200}
-        >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
       </ProjectInfoDiv>
       <InfoGridDiv>
         <span>모집 구분</span>
