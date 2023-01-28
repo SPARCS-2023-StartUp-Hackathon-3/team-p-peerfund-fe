@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import DefaultLayout from '@/components/DefaultLayout';
 import styled from 'styled-components';
 import palette from '@/style/palette';
-
-import { Divider, Form, Input, Select } from 'antd';
+import { Input, Button, Modal } from 'antd';
+import { useParams } from 'react-router-dom';
+import ApplyModal from '@/components/ApplyModal';
 const { TextArea } = Input;
 
 const DarkH1 = styled.h1`
@@ -23,8 +24,8 @@ const ProjectInfoDiv = styled.div`
 const ProfileImg = styled.div`
   border-radius: 100%;
   background-color: ${palette.dark};
-  width: 22px;
-  height: 22px;
+  width: 34px;
+  height: 34px;
 `;
 
 const InfoGridDiv = styled.div`
@@ -74,18 +75,44 @@ const tempComments = [
 ];
 
 const Project = () => {
+  const params = useParams();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [commentData, setCommentData] = useState({
+    comment: '',
+    projectId: params.projectId,
+  });
+
+  const onChangeComment = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setCommentData({
+      ...commentData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  useEffect(() => {
+    console.log(commentData);
+  }, [commentData]);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   return (
     <DefaultLayout>
       <ProjectInfoDiv>
         <div style={{ gap: '30px', display: 'flex', flexDirection: 'column' }}>
           <DarkH1>{tempData.title}</DarkH1>
-          <div style={{ gap: '10px', display: 'flex' }}>
+          <div style={{ gap: '10px', display: 'flex', alignContent: 'center' }}>
             <ProfileImg />
             <span>{tempData.author}</span>
             <span>{tempData.date}</span>
           </div>
         </div>
-        <button type="button">지원하기</button>
+        <Button type="primary" onClick={toggleModal}>
+          지원하기
+        </Button>
+
+        <ApplyModal title={tempData.title} isModalOpen={isModalOpen} toggleModal={toggleModal}></ApplyModal>
       </ProjectInfoDiv>
       <InfoGridDiv>
         <span>모집 구분</span>
@@ -102,7 +129,16 @@ const Project = () => {
       <div style={{ marginBottom: '30px' }}>{tempData.content}</div>
 
       <DarkH1>{tempComments.length}개의 댓글이 있습니다.</DarkH1>
-      <TextArea rows={3} placeholder="댓글을 달아주세요." size="large" />
+      <TextArea
+        rows={3}
+        placeholder="댓글을 달아주세요."
+        size="large"
+        name="comment"
+        value={commentData.comment}
+        onChange={onChangeComment}
+      />
+
+      <button type="button">등록하기</button>
       <CommentUl>
         {tempComments.map((comment, index) => (
           <Commentli key={index}>
