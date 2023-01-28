@@ -13,8 +13,8 @@ export type RouteMetaType = string | RouteMetaProps;
 export type RouterMetaTypes = { [key: string]: RouteMetaType | RouteMetaType[] };
 
 const routerMeta: RouterMetaTypes = {
-  Home: { path: '/' },
-  Peer: { path: '/peer' },
+  Home: { path: '/', hide: true },
+  Peer: { title: 'PEER 모집', path: '/peer' },
   Register: {
     path: '/register',
     account: false,
