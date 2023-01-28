@@ -33,14 +33,14 @@ const Account: FunctionComponent<IAccountProps> = (props) => {
     } else if (isEmpty(account)) {
       return <Spin size={'small'} />;
     } else {
-      const { email, name, roleType } = account;
+      const { userName, name, roleType } = account;
       return (
         <Badge.Ribbon text={roleType}>
           <Card
             title={
               <FlexCenter>
                 <Avatar icon={<UserOutlined />} />
-                <span style={{ marginLeft: 5 }}>{email}</span>
+                <span style={{ marginLeft: 5 }}>{userName}</span>
               </FlexCenter>
             }
             headStyle={{ paddingRight: '100px' }}
