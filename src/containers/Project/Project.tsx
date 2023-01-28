@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import DefaultLayout from '@/components/DefaultLayout';
 import styled from 'styled-components';
 import palette from '@/style/palette';
 
-import { Divider, Form, Input, Select } from 'antd';
+import { Input } from 'antd';
+import { useParams } from 'react-router-dom';
 const { TextArea } = Input;
 
 const DarkH1 = styled.h1`
@@ -23,8 +24,8 @@ const ProjectInfoDiv = styled.div`
 const ProfileImg = styled.div`
   border-radius: 100%;
   background-color: ${palette.dark};
-  width: 22px;
-  height: 22px;
+  width: 34px;
+  height: 34px;
 `;
 
 const InfoGridDiv = styled.div`
@@ -74,12 +75,30 @@ const tempComments = [
 ];
 
 const Project = () => {
+  const params = useParams();
+
+  const [commentData, setCommentData] = useState({
+    comment: '',
+    projectId: params.projectId,
+  });
+
+  const onChangeComment = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setCommentData({
+      ...commentData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  useEffect(() => {
+    console.log(commentData);
+  }, [commentData]);
+
   return (
     <DefaultLayout>
       <ProjectInfoDiv>
         <div style={{ gap: '30px', display: 'flex', flexDirection: 'column' }}>
           <DarkH1>{tempData.title}</DarkH1>
-          <div style={{ gap: '10px', display: 'flex' }}>
+          <div style={{ gap: '10px', display: 'flex', alignContent: 'center' }}>
             <ProfileImg />
             <span>{tempData.author}</span>
             <span>{tempData.date}</span>
@@ -102,7 +121,16 @@ const Project = () => {
       <div style={{ marginBottom: '30px' }}>{tempData.content}</div>
 
       <DarkH1>{tempComments.length}개의 댓글이 있습니다.</DarkH1>
-      <TextArea rows={3} placeholder="댓글을 달아주세요." size="large" />
+      <TextArea
+        rows={3}
+        placeholder="댓글을 달아주세요."
+        size="large"
+        name="comment"
+        value={commentData.comment}
+        onChange={onChangeComment}
+      />
+
+      <button type="button">등록하기</button>
       <CommentUl>
         {tempComments.map((comment, index) => (
           <Commentli key={index}>
