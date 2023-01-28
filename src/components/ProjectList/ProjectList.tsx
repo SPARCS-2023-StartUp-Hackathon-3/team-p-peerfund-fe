@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '@/style/palette';
+import { Card } from 'antd';
+
+const { Meta } = Card;
 
 const ProjectListDiv = styled.div`
   display: grid;
@@ -10,6 +13,10 @@ const ProjectListDiv = styled.div`
   column-gap: 20px;
   row-gap: 30px;
   margin: 20px 0;
+
+  @media screen and (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const ProjectItemDiv = styled.div`
@@ -29,14 +36,15 @@ const CategoryGroupDiv = styled.div`
 const CategoryDiv = styled.div<{ isSelected: boolean }>`
   cursor: pointer;
   background-color: ${palette.dark};
-  padding: 8px 15px;
+  padding: 10px 18px;
   border-radius: 20px;
   transition: all 0.2s ease-in-out;
+  color: ${palette.white};
 
-  background-color: ${(props) => (props.isSelected ? palette.primary : palette.dark)};
+  background-color: ${(props) => (props.isSelected ? palette.primary : palette.secondary)};
 
   &:hover {
-    filter: brightness(80%);
+    filter: brightness(90%);
   }
 `;
 
@@ -109,7 +117,15 @@ const ProjectList = ({ title, firstCategories = [], secondCategories }: IProject
       </CategoryGroupDiv>
       <ProjectListDiv>
         {tempProjects.map((tempProject, index) => (
-          <ProjectItemDiv key={index} onClick={() => onClickProject(tempProject)}></ProjectItemDiv>
+          <Card
+            key={index}
+            hoverable
+            cover={<img alt="example" src={'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png'} />}
+            onClick={() => onClickProject(tempProject)}
+          >
+            <Meta title="title" description="description" />
+          </Card>
+          // <ProjectItemDiv key={index} onClick={() => onClickProject(tempProject)}></ProjectItemDiv>
         ))}
       </ProjectListDiv>
     </>

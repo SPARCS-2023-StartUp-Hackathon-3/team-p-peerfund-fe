@@ -1,9 +1,10 @@
 const palette = {
   primary: '#601AC3',
-  dark: '#777777',
-  darkGrey: '#333333',
-  grey: '#f6f7f9',
-  lightgrey: '#939090',
+  secondary: '#bfa3e7',
+  dark: '#130527',
+  darkGrey: '#777777',
+  grey: '#939090',
+  lightgrey: '#f6f7f9',
   white: '#ffffff',
 };
 
