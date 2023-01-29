@@ -1,4 +1,4 @@
-import React, { FunctionComponent, CSSProperties, useState } from 'react';
+import React, { FunctionComponent, CSSProperties } from 'react';
 import styled from 'styled-components';
 import Background from '@/style/background.png';
 import FormSelector, { FormType } from '@/components/Forms/FormSwitcher';
@@ -22,6 +22,7 @@ const BackgroundDiv = styled.div`
 const HomeBoxDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  max-width: 1200px;
   width: 85%;
   padding: 30px;
   @media screen and (max-width: 1000px) {
