@@ -7,6 +7,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import Project from '@/components/Project';
 import FlexCenter from '@/components/FlexCenter';
+import { pojectList } from './mock';
 const { CheckableTag } = Tag;
 
 const ProjectListDiv = styled.div`
@@ -55,19 +56,12 @@ const ProjectList = () => {
     navigate(`/project/${projectId}`);
   };
 
-  const dummyData = Array(6).fill({
-    img: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
-    title: 'titletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitle',
-    author: 'jiheon',
-    date: '2023-01-28 ~ 02.03',
-  });
-
-  const [projects, setProjects] = useState(dummyData);
+  const [projects, setProjects] = useState(pojectList);
   const fetchData = () => {
     console.log(1);
 
     setTimeout(() => {
-      setProjects(projects.concat(dummyData));
+      setProjects(projects.concat(pojectList));
     }, 1000);
   };
 
@@ -107,8 +101,18 @@ const ProjectList = () => {
       >
         <ProjectListDiv>
           {projects.map((item, index) => {
-            const { title, author, date } = item;
-            return <Project key={index} id={index} title={title} date={date} author={author} />;
+            const { img, title, author, author_img, date } = item;
+            return (
+              <Project
+                key={index}
+                imageUrl={img}
+                id={index}
+                title={title}
+                date={date}
+                author={author}
+                authorImageUrl={author_img}
+              />
+            );
           })}
         </ProjectListDiv>
       </InfiniteScroll>

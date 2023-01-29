@@ -186,7 +186,16 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
       <ProjectInfoDiv>
         <DarkH1>협의 필요 내용</DarkH1>
       </ProjectInfoDiv>
-      <div style={{ marginBottom: '30px', wordBreak: 'keep-all', padding: 5 }}>{tempData.content}</div>
+      <div style={{ marginBottom: '30px', wordBreak: 'keep-all', padding: 5 }}>
+        {tempData.content.split('\n').map((line, i) => {
+          return (
+            <span key={i}>
+              {line}
+              <br />
+            </span>
+          );
+        })}
+      </div>
 
       <ProjectInfoDiv>
         <DarkH1>참여자 프로필</DarkH1>
