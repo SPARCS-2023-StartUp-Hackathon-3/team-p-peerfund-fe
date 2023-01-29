@@ -1,12 +1,24 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import DefaultLayout from '@/components/DefaultLayout';
-import { useNavigate } from 'react-router-dom';
-import { Input, Button, Descriptions, Row, Col } from 'antd';
-import { CommentUl, Commentli, DarkH1, InfoGridDiv, ProfileImg, ProjectInfoDiv } from './ProjectDetailStyles';
+
+import { Input, Button, Descriptions, Row, Col, Avatar, Modal, App } from 'antd';
+import {
+  CommentUl,
+  Commentli,
+  DarkH1,
+  ProfileImg,
+  ProjectDescription,
+  ProjectInfoDiv,
+  ProfileCard,
+} from './ProjectDetailStyles';
 import FlexCenter from '@/components/FlexCenter';
-import { tempData, tempComments } from './mock';
+import { tempData, tempComments, tempTeams } from './mock';
 import { generateIndexImage } from '@/utils';
-import ToolIcon from '../ToolIcon/ToolIcon';
+import ToolIcon from '@/components/ToolIcon';
+import palette from '@/style/palette';
+import ApplyForm from '@/components/Forms/ApplyForm';
+
+const { dark, lightgrey } = palette;
 const { TextArea } = Input;
 
 interface IProjectDetailProps {
@@ -33,7 +45,8 @@ const descriptionColumns = {
 
 const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
   const { projectId } = props;
-  const navigate = useNavigate();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [commentData, setCommentData] = useState({
     comment: '',
     projectId,
@@ -51,7 +64,20 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
   }, [commentData]);
 
   const onClickApplyBtn = () => {
-    navigate(`/apply/${projectId}`);
+    // navigate(`/apply/${projectId}`);
+    setModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setModalOpen(false);
+    }, 3000);
+  };
+
+  const handleCancel = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -59,21 +85,58 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
       <ProjectInfoDiv>
         <div style={{ gap: '30px', display: 'flex', flexDirection: 'column' }}>
           <DarkH1>{tempData.title}</DarkH1>
-          <div style={{ gap: '10px', display: 'flex', alignContent: 'center' }}>
-            <ProfileImg />
-            <span>{tempData.author}</span>
-            <span>{tempData.date}</span>
-          </div>
+          <FlexCenter style={{ justifyContent: 'start' }}>
+            <ProfileImg style={{ backgroundImage: `url(${generateIndexImage(Number(projectId))})` }} />
+            <span style={{ marginLeft: 10 }}>{tempData.author}</span>
+            <span style={{ marginLeft: 20 }}>{tempData.date}</span>
+          </FlexCenter>
         </div>
-        <Button type="primary" onClick={onClickApplyBtn}>
+        <Button
+          type="primary"
+          size="large"
+          style={{ borderRadius: 20, paddingLeft: 30, paddingRight: 30 }}
+          onClick={onClickApplyBtn}
+        >
           지원하기
         </Button>
+        <Modal
+          open={modalOpen}
+          title={tempData.title}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          footer={[
+            <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
+              지원하기
+            </Button>,
+          ]}
+        >
+          <FlexCenter style={{ flexDirection: 'column', width: '100%' }}>
+            {tempTeams
+              .filter((v, i) => i == 0)
+              .map(({ image, name }, i) => (
+                <ProfileCard
+                  key={i}
+                  style={{ border: 'none', backgroundColor: lightgrey, padding: '10px 30px', width: 'auto' }}
+                >
+                  <Avatar src={image} />
+                  <div>
+                    <span className="name">{name}</span>
+                  </div>
+                  <Button type={'primary'} style={{ borderRadius: 20, marginLeft: 30 }}>
+                    프로필 수정
+                  </Button>
+                </ProfileCard>
+              ))}
+            <div style={{ width: '100%' }}>
+              <ApplyForm />
+            </div>
+          </FlexCenter>
+        </Modal>
       </ProjectInfoDiv>
       <Row>
         <Col {...imageColumns}>
           <div
             style={{
-              flex: 'none',
               borderRadius: '16px',
               maxWidth: '600px',
               width: '100%',
@@ -87,32 +150,34 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
         </Col>
         <Col {...descriptionColumns}>
           <FlexCenter style={{ padding: 15, height: '100%' }}>
-            <Descriptions column={1}>
-              <Descriptions.Item label="진행 날짜">{`${tempData.start_date} ~ ${tempData.end_date}`}</Descriptions.Item>
-              <Descriptions.Item label="아이디어">있음</Descriptions.Item>
-              <Descriptions.Item label="Deposit">
-                <b>1</b> 만원
-              </Descriptions.Item>
-              <Descriptions.Item label="구인 직무 1">
-                <div>
-                  <div>디자이너, 2명</div>
-                  <FlexCenter>
-                    <ToolIcon tool="figma" />
-                    <ToolIcon tool="xd" type="plain" style={{ marginLeft: 5 }} />
-                  </FlexCenter>
-                </div>
-              </Descriptions.Item>
-              <Descriptions.Item label="구인 직무 2">
-                <div>
-                  <div>백엔드 개발자, 1명</div>
-                  <FlexCenter>
-                    <ToolIcon tool="typescript" />
-                    <ToolIcon tool="docker" type="plain" style={{ marginLeft: 5 }} />
-                    <ToolIcon tool="spring" style={{ marginLeft: 5 }} />
-                  </FlexCenter>
-                </div>
-              </Descriptions.Item>
-            </Descriptions>
+            <ProjectDescription style={{ width: '100%' }}>
+              <Descriptions column={1} bordered>
+                <Descriptions.Item label="진행 날짜">{`${tempData.start_date} ~ ${tempData.end_date}`}</Descriptions.Item>
+                <Descriptions.Item label="아이디어">있음</Descriptions.Item>
+                <Descriptions.Item label="Deposit">
+                  <b>1</b> 만원
+                </Descriptions.Item>
+                <Descriptions.Item label="구인 직무 1">
+                  <div>
+                    <div>디자이너, 2명</div>
+                    <FlexCenter style={{ justifyContent: 'start' }}>
+                      <ToolIcon tool="figma" />
+                      <ToolIcon tool="xd" type="plain" style={{ marginLeft: 5 }} />
+                    </FlexCenter>
+                  </div>
+                </Descriptions.Item>
+                <Descriptions.Item label="구인 직무 2">
+                  <div>
+                    <div>백엔드 개발자, 1명</div>
+                    <FlexCenter style={{ justifyContent: 'start' }}>
+                      <ToolIcon tool="typescript" />
+                      <ToolIcon tool="docker" type="plain" style={{ marginLeft: 5 }} />
+                      <ToolIcon tool="spring" style={{ marginLeft: 5 }} />
+                    </FlexCenter>
+                  </div>
+                </Descriptions.Item>
+              </Descriptions>
+            </ProjectDescription>
           </FlexCenter>
         </Col>
       </Row>
@@ -121,19 +186,38 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
       <ProjectInfoDiv>
         <DarkH1>협의 필요 내용</DarkH1>
       </ProjectInfoDiv>
-      <div style={{ marginBottom: '30px' }}>{tempData.content}</div>
+      <div style={{ marginBottom: '30px', wordBreak: 'keep-all', padding: 5 }}>{tempData.content}</div>
+
+      <ProjectInfoDiv>
+        <DarkH1>참여자 프로필</DarkH1>
+      </ProjectInfoDiv>
+      <FlexCenter style={{ marginBottom: '80px', justifyContent: 'start', padding: 5 }}>
+        {tempTeams.map(({ image, position, name }, i) => (
+          <ProfileCard key={i}>
+            <Avatar src={image} />
+            <div>
+              <span className="position">{position}</span>
+              <span className="name">{name}</span>
+            </div>
+          </ProfileCard>
+        ))}
+      </FlexCenter>
 
       <DarkH1>{tempComments.length}개의 댓글이 있습니다.</DarkH1>
-      <TextArea
-        rows={3}
-        placeholder="댓글을 달아주세요."
-        size="large"
-        name="comment"
-        value={commentData.comment}
-        onChange={onChangeComment}
-      />
+      <FlexCenter style={{ flexDirection: 'column', marginTop: 5 }}>
+        <TextArea
+          rows={4}
+          placeholder="댓글을 달아주세요."
+          size="large"
+          name="comment"
+          value={commentData.comment}
+          onChange={onChangeComment}
+        />
 
-      <Button type="primary">등록하기</Button>
+        <Button type="primary" size="large" style={{ marginTop: 10, marginLeft: 'auto', backgroundColor: dark }}>
+          등록하기
+        </Button>
+      </FlexCenter>
       <CommentUl>
         {tempComments.map((comment, index) => (
           <Commentli key={index}>

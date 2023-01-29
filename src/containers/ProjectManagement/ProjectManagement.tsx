@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import { Button, Result } from 'antd';
 import DefaultLayout from '@/components/DefaultLayout';
 import LayoutWrapper from '@/components/LayoutWrappwer';
+import { Button, Result } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
-interface INotFoundProps {}
+interface IProjectManagementProps {}
 
-const NotFound: FunctionComponent<INotFoundProps> = (props) => {
+const ProjectManagement: FunctionComponent<IProjectManagementProps> = (props) => {
   const navigate = useNavigate();
 
   return (
@@ -27,4 +27,4 @@ const NotFound: FunctionComponent<INotFoundProps> = (props) => {
   );
 };
 
-export default NotFound;
+export default ProjectManagement;

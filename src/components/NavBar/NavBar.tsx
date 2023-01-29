@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useMemo } from 'react';
-import { Layout, Menu } from 'antd';
+import { Button, Layout, Menu } from 'antd';
 const { Header } = Layout;
 import { routerMeta } from '@/meta';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -110,11 +110,9 @@ const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
           onClick={() => navigate('/')}
         />
         <Menu theme="light" mode="horizontal" style={menuStyle} activeKey={location.pathname} selectable={false}>
-          {defaultMenus.map(({ componentKey, path }) => (
+          {assignMenus.map(({ componentKey, path, title }) => (
             <Menu.Item key={path}>
-              <Link to={path}>
-                {componentKey} ({path})
-              </Link>
+              <Link to={path}>{title || `${componentKey} (${path})`}</Link>
             </Menu.Item>
           ))}
         </Menu>
@@ -123,7 +121,7 @@ const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
             buttonProps={
               {
                 placement: 'bottomLeft',
-                title: 'Account',
+                // title: 'Account',
                 content: <Account />,
               } as any
             }
@@ -131,6 +129,18 @@ const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
             <UserOutlined />
           </MenuPopOver>
         </div>
+        {savedAccount && (
+          <div style={{ opacity: 1, marginLeft: 'auto', order: assignMenus.length + 3 }}>
+            <Button
+              type="primary"
+              ghost
+              style={{ borderRadius: 20, marginLeft: 20 }}
+              onClick={() => navigate('/pear_create')}
+            >
+              게시글 작성
+            </Button>
+          </div>
+        )}
       </Header>
     </Layout>
   );

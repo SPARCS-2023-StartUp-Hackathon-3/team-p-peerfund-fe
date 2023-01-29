@@ -1,5 +1,6 @@
 import { Form, FormInstance } from 'antd';
 import React, { FunctionComponent } from 'react';
+import styled from 'styled-components';
 
 interface IFormCols {
   labelCol?: any;
@@ -46,6 +47,15 @@ const defaultFormCols = {
   },
 };
 
+const FormStyle = styled.div`
+  & .ant-form-item-label {
+    & > label {
+      font-weight: bolder;
+      font-size: 20px;
+    }
+  }
+`;
+
 const CommonForm: FunctionComponent<ICommonFormProps> = (props) => {
   const { children, formInstance = null, formCols = defaultFormCols, onFieldsChange } = props;
   const [contextForm] = useForm();
@@ -53,18 +63,20 @@ const CommonForm: FunctionComponent<ICommonFormProps> = (props) => {
   const form = formInstance || contextForm;
 
   return (
-    <Form
-      form={form}
-      onFieldsChange={(changedFields: any[], allFields: any[]) => {
-        console.log('changedFields', changedFields);
-        console.log('allFields', allFields);
-        onFieldsChange?.(changedFields, allFields);
-      }}
-      {...formCols}
-      style={{ width: '100%' }}
-    >
-      {children}
-    </Form>
+    <FormStyle>
+      <Form
+        form={form}
+        onFieldsChange={(changedFields: any[], allFields: any[]) => {
+          console.log('changedFields', changedFields);
+          console.log('allFields', allFields);
+          onFieldsChange?.(changedFields, allFields);
+        }}
+        {...formCols}
+        style={{ width: '100%' }}
+      >
+        {children}
+      </Form>
+    </FormStyle>
   );
 };
 
