@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 const Title = styled.div`
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   white-space: normal;
-  height: 74px;
+  height: 66px;
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-all;

@@ -86,7 +86,7 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
         <div style={{ gap: '30px', display: 'flex', flexDirection: 'column' }}>
           <DarkH1>{tempData.title}</DarkH1>
           <FlexCenter style={{ justifyContent: 'start' }}>
-            <ProfileImg style={{ backgroundImage: `url(${generateIndexImage(Number(projectId))})` }} />
+            <Avatar src={tempData.author_image} />
             <span style={{ marginLeft: 10 }}>{tempData.author}</span>
             <span style={{ marginLeft: 20 }}>{tempData.date}</span>
           </FlexCenter>
@@ -186,7 +186,16 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
       <ProjectInfoDiv>
         <DarkH1>협의 필요 내용</DarkH1>
       </ProjectInfoDiv>
-      <div style={{ marginBottom: '30px', wordBreak: 'keep-all', padding: 5 }}>{tempData.content}</div>
+      <div style={{ marginBottom: '30px', wordBreak: 'keep-all', padding: 5 }}>
+        {tempData.content.split('\n').map((line, i) => {
+          return (
+            <span key={i}>
+              {line}
+              <br />
+            </span>
+          );
+        })}
+      </div>
 
       <ProjectInfoDiv>
         <DarkH1>참여자 프로필</DarkH1>
