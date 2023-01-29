@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import DefaultLayout from '@/components/DefaultLayout';
-import { useNavigate } from 'react-router-dom';
-import { Input, Button, Descriptions, Row, Col, Avatar } from 'antd';
+
+import { Input, Button, Descriptions, Row, Col, Avatar, Modal, App } from 'antd';
 import {
   CommentUl,
   Commentli,
@@ -16,8 +16,9 @@ import { tempData, tempComments, tempTeams } from './mock';
 import { generateIndexImage } from '@/utils';
 import ToolIcon from '@/components/ToolIcon';
 import palette from '@/style/palette';
+import ApplyForm from '@/components/Forms/ApplyForm';
 
-const { dark } = palette;
+const { dark, lightgrey } = palette;
 const { TextArea } = Input;
 
 interface IProjectDetailProps {
@@ -44,7 +45,8 @@ const descriptionColumns = {
 
 const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
   const { projectId } = props;
-  const navigate = useNavigate();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [commentData, setCommentData] = useState({
     comment: '',
     projectId,
@@ -62,7 +64,20 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
   }, [commentData]);
 
   const onClickApplyBtn = () => {
-    navigate(`/apply/${projectId}`);
+    // navigate(`/apply/${projectId}`);
+    setModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setModalOpen(false);
+    }, 3000);
+  };
+
+  const handleCancel = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -84,6 +99,37 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
         >
           지원하기
         </Button>
+        <Modal
+          open={modalOpen}
+          title={tempData.title}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          footer={[
+            <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
+              지원하기
+            </Button>,
+          ]}
+        >
+          <FlexCenter style={{ flexDirection: 'column' }}>
+            {tempTeams
+              .filter((v, i) => i == 0)
+              .map(({ image, name }, i) => (
+                <ProfileCard
+                  key={i}
+                  style={{ border: 'none', backgroundColor: lightgrey, padding: '10px 30px', width: 'auto' }}
+                >
+                  <Avatar src={image} />
+                  <div>
+                    <span className="name">{name}</span>
+                  </div>
+                  <Button type={'primary'} style={{ borderRadius: 20, marginLeft: 30 }}>
+                    프로필 수정
+                  </Button>
+                </ProfileCard>
+              ))}
+            <ApplyForm />
+          </FlexCenter>
+        </Modal>
       </ProjectInfoDiv>
       <Row>
         <Col {...imageColumns}>

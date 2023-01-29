@@ -76,12 +76,12 @@ export const ProfileCard = styled.div`
     & > .position {
       display: block;
       font-size: 14px;
+      padding-bottom: 6px;
     }
 
     & > .name {
-      padding-top: 6px;
       display: block;
-      font-weight: 700;
+      font-weight: bolder;
     }
   }
 `;
