@@ -85,7 +85,7 @@ const ProjectDetail: FunctionComponent<IProjectDetailProps> = (props) => {
       <ProjectInfoDiv>
         <div style={{ gap: '30px', display: 'flex', flexDirection: 'column' }}>
           <DarkH1>{tempData.title}</DarkH1>
-          <FlexCenter>
+          <FlexCenter style={{ justifyContent: 'start' }}>
             <ProfileImg />
             <span style={{ marginLeft: 10 }}>{tempData.author}</span>
             <span style={{ marginLeft: 20 }}>{tempData.date}</span>

@@ -4,8 +4,8 @@ import styled from 'styled-components';
 const { dark } = palette;
 
 export const DarkH1 = styled.span`
-  font-size: 22px;
-  font-weight: bold;
+  font-size: 30px;
+  font-weight: bolder;
 `;
 
 export const ProjectInfoDiv = styled.div`

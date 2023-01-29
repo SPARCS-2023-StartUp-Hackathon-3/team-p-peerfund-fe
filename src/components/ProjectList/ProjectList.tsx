@@ -28,9 +28,11 @@ const ProjectListDiv = styled.div`
 `;
 
 const ColoredH1 = styled.h1`
-  font-size: 24px;
-  font-weight: bold;
-  color: ${palette.primary};
+  font-size: 30px;
+  font-weight: bolder;
+  & > .color {
+    color: ${palette.primary};
+  }
 `;
 
 interface IProjectListProps {}
@@ -70,9 +72,12 @@ const ProjectList = () => {
   };
 
   return (
-    <div>
-      <ColoredH1>{projects.length}개의 스프린트 프로젝트가 매칭되었어요.</ColoredH1>
-      <div style={{ display: 'table-caption' }}>
+    <div style={{ paddingTop: 50 }}>
+      <div>3일 동안 진행되는</div>
+      <ColoredH1>
+        <span className="color">{projects.length}개</span>의 스프린트 프로젝트가 매칭되었어요.
+      </ColoredH1>
+      <div style={{ display: 'table-caption', paddingTop: 30 }}>
         <Space size={[0, 8]}>
           {tagsData.map((tag) => (
             <CheckableTag
