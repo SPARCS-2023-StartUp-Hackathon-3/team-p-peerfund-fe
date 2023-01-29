@@ -23,7 +23,7 @@ const routerMeta: RouterMetaTypes = {
   PeerForm: { path: '/pear_create', hide: true },
   Detail: '/project/:projectId',
   Apply: '/apply/:projectId',
-  TestForm: '/testform',
+  TestForm: { path: '/testform', hide: true },
 };
 
 export default routerMeta;
