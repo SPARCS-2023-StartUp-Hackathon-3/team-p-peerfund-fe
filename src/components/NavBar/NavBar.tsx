@@ -121,7 +121,7 @@ const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
             buttonProps={
               {
                 placement: 'bottomLeft',
-                title: 'Account',
+                // title: 'Account',
                 content: <Account />,
               } as any
             }
