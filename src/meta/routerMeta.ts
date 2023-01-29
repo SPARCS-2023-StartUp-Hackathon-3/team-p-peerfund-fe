@@ -20,6 +20,7 @@ const routerMeta: RouterMetaTypes = {
     account: false,
     hide: true,
   },
+  PeerForm: { path: '/pear_create', hide: true },
   Detail: '/project/:projectId',
   Apply: '/apply/:projectId',
   TestForm: '/testform',

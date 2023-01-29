@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useMemo } from 'react';
-import { Layout, Menu } from 'antd';
+import { Button, Layout, Menu } from 'antd';
 const { Header } = Layout;
 import { routerMeta } from '@/meta';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -128,6 +128,16 @@ const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
           >
             <UserOutlined />
           </MenuPopOver>
+        </div>
+        <div style={{ opacity: 1, marginLeft: 'auto', order: assignMenus.length + 3 }}>
+          <Button
+            type="primary"
+            ghost
+            style={{ borderRadius: 20, marginLeft: 20 }}
+            onClick={() => navigate('/pear_create')}
+          >
+            게시글 작성
+          </Button>
         </div>
       </Header>
     </Layout>
