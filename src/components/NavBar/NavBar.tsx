@@ -110,7 +110,7 @@ const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
           onClick={() => navigate('/')}
         />
         <Menu theme="light" mode="horizontal" style={menuStyle} activeKey={location.pathname} selectable={false}>
-          {defaultMenus.map(({ componentKey, path, title }) => (
+          {assignMenus.map(({ componentKey, path, title }) => (
             <Menu.Item key={path}>
               <Link to={path}>{title || `${componentKey} (${path})`}</Link>
             </Menu.Item>

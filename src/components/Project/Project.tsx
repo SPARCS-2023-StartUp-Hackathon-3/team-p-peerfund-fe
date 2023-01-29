@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import generateIndexImage from '@/utils/generateIndexImage';
 import Heart from 'react-heart';
 import palette from '@/style/palette';
-import styled from 'styled-components';
 import Title from './ProjectTitle';
 import ProjectWrapper from './ProjectWrapper';
 import FlexCenter from '../FlexCenter';

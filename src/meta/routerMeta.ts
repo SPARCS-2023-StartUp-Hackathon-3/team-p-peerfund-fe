@@ -23,7 +23,7 @@ const routerMeta: RouterMetaTypes = {
   },
   PeerForm: { path: '/pear_create', hide: true, account: true },
   Detail: '/project/:projectId',
-  ProjectManagement: { path: '/project_management', title: '프로젝트 관리' },
+  ProjectManagement: { path: '/project_management', title: '프로젝트 관리', account: true },
   Apply: {
     path: '/apply/:projectId',
     account: true,
