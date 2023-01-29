@@ -129,16 +129,18 @@ const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
             <UserOutlined />
           </MenuPopOver>
         </div>
-        <div style={{ opacity: 1, marginLeft: 'auto', order: assignMenus.length + 3 }}>
-          <Button
-            type="primary"
-            ghost
-            style={{ borderRadius: 20, marginLeft: 20 }}
-            onClick={() => navigate('/pear_create')}
-          >
-            게시글 작성
-          </Button>
-        </div>
+        {savedAccount && (
+          <div style={{ opacity: 1, marginLeft: 'auto', order: assignMenus.length + 3 }}>
+            <Button
+              type="primary"
+              ghost
+              style={{ borderRadius: 20, marginLeft: 20 }}
+              onClick={() => navigate('/pear_create')}
+            >
+              게시글 작성
+            </Button>
+          </div>
+        )}
       </Header>
     </Layout>
   );

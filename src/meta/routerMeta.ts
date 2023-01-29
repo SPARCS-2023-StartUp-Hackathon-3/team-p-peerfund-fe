@@ -1,4 +1,5 @@
 import { RouteProps } from 'react-router-dom';
+import ProjectManagement from '../containers/ProjectManagement/ProjectManagement';
 
 interface CustomRouteProps {
   title: string;
@@ -20,9 +21,13 @@ const routerMeta: RouterMetaTypes = {
     account: false,
     hide: true,
   },
-  PeerForm: { path: '/pear_create', hide: true },
+  PeerForm: { path: '/pear_create', hide: true, account: true },
   Detail: '/project/:projectId',
-  Apply: '/apply/:projectId',
+  ProjectManagement: { path: '/project_management', title: '프로젝트 관리' },
+  Apply: {
+    path: '/apply/:projectId',
+    account: true,
+  },
   TestForm: { path: '/testform', hide: true },
 };
 
